@@ -41,6 +41,8 @@ public class MainActivity extends Activity {
 
         int arrayRes = jni.processObjectArrayFromNative(objArray);
         Log.d(TAG, "Result processObjectArrayFromNative: " + arrayRes);
+
+        jni.testAll();
     }
 
 
