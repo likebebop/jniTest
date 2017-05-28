@@ -17,8 +17,9 @@ public class JniTest {
      */
     public native String stringFromJNI();
 
-    public native float getMemberFieldFromNative(MeshData obj);
+    public native float getArrayFieldFromNative(MeshData obj);
     public native int invokeMemberFuncFromNative(MeshData obj);
+    public native int getFieldFromNative(MeshData obj);
     public native MeshData createObjectFromNative(int param);
     public native int processObjectArrayFromNative(MeshData[] objArray);
 }

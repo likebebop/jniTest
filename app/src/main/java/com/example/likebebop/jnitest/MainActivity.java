@@ -24,7 +24,8 @@ public class MainActivity extends Activity {
 
         // access class member in native code and return result to caller
         MeshData obj = new MeshData(5);
-        Log.d(TAG, "Result getMemberFieldFromNative: " + jni.getMemberFieldFromNative(obj));
+        Log.d(TAG, "Result getArrayFieldFromNative: " + jni.getArrayFieldFromNative(obj));
+        Log.d(TAG, "Result getFieldFromNative: " + jni.getFieldFromNative(obj));
         Log.d(TAG, "Result invokeMemberFuncFromNative: " + jni.invokeMemberFuncFromNative(obj));
 
         // create object in native method and return it to caller

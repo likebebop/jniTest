@@ -10,7 +10,6 @@ public class MeshData {
 
         floatArray = new float[arraySize];
 
-        // fills up coords with dummy values
         for (int i = 0; i < arraySize; ++i) {
             floatArray[i] = 10.0f * i;
         }
