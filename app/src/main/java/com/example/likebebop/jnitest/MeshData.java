@@ -1,22 +1,22 @@
 package com.example.likebebop.jnitest;
 
 public class MeshData {
-    private int _facetCount;
+    private int arraySize;
 
-    public float[] VertexCoords;
+    public float[] floatArray;
 
-    public MeshData(int facetCount) {
-        _facetCount = facetCount;
+    public MeshData(int arraySize) {
+        this.arraySize = arraySize;
 
-        VertexCoords = new float[facetCount];
+        floatArray = new float[arraySize];
 
         // fills up coords with dummy values
-        for (int i = 0; i < facetCount; ++i) {
-            VertexCoords[i] = 10.0f * i;
+        for (int i = 0; i < arraySize; ++i) {
+            floatArray[i] = 10.0f * i;
         }
     }
 
-    public int getFacetCount() {
-        return _facetCount;
+    public int getArraySize() {
+        return arraySize;
     }
 }
