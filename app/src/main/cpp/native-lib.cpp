@@ -34,7 +34,7 @@ Java_com_example_likebebop_jnitest_JniTest_stringFromJNI(
 
     return env->NewStringUTF(j.dump().c_str());
 }
-
+/*
 JNIEXPORT jfloat JNICALL
 Java_com_example_likebebop_jnitest_JniTest_getMemberFieldFromNative(JNIEnv *env, jobject instance,
                                                                     jobject obj) {
@@ -66,5 +66,5 @@ Java_com_example_likebebop_jnitest_JniTest_processObjectArrayFromNative(JNIEnv *
 
     // TODO
 
-}
+}*/
 }
