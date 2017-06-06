@@ -148,15 +148,39 @@ namespace Test {
         sp->debug();
     }
 
-    void testLamda() {
-        auto func = [](int n) {return n*n;};
 
-        int result = func(5);
-        __android_log_print(ANDROID_LOG_INFO, TAG, "test Lamda : %d", result);
+    auto multiply() {
+        return [](int n){return n*n;};
+    }
+
+    void testLamda() {
+        //-- https://stackoverflow.com/questions/7951377/what-is-the-type-of-lambda-when-deduced-with-auto-in-c11
+        //-- 아래 두개 결과가 같다. auto로 파악하는듯
+        //auto func = [](auto n)->float{return n*n/2.0;};
+        auto func = [](auto n){return n*n/2.0;};
+        float result = func(5);
+        __android_log_print(ANDROID_LOG_INFO, TAG, "test Lamda : %.2f", result);
 
         std:for_each(Derived::scv.begin(), Derived::scv.end(), [](auto n){
             __android_log_print(ANDROID_LOG_INFO, TAG, "iteration : %d", n);
         });
+
+        //-- auto
+        int idx = 0;
+        for (auto i : Derived::scv) {
+            __android_log_print(ANDROID_LOG_INFO, TAG, "by auto : %d, %.2x, %.2x", i, &i, &Derived::scv[idx]);
+            idx++;
+        }
+
+        idx = 0;
+        //-- auto ref
+        for (auto& i : Derived::scv) {
+            __android_log_print(ANDROID_LOG_INFO, TAG, "by auto ref : %d, %.2x, %.2x", i, &i, &Derived::scv[idx]);
+            idx++;
+        }
+
+
+        __android_log_print(ANDROID_LOG_INFO, TAG, "test Lamda by function : %d", multiply()(5));
     }
 
 }
