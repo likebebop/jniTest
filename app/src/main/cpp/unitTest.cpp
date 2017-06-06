@@ -1,13 +1,15 @@
 #include <jni.h>
 #include <string>
 #include <android/log.h>
+#include <vector>
 
 
 using namespace std;
 
 namespace My {
+    static const char* TAG = "likebebop";
     void debug(const char *s) {
-        __android_log_print(ANDROID_LOG_INFO, "likebebop", s, "");
+        __android_log_print(ANDROID_LOG_INFO, TAG, s, "");
     }
 }
 
@@ -44,20 +46,45 @@ namespace My {
             My::debug("Derived");
         }
 
+        //-- https://stackoverflow.com/questions/14116003/difference-between-constexpr-and-const
+        static constexpr float MY_CONT_FLOAT = 5;
+        static int sInt;
+
         string name;
         float percentage;
+
+        //-- float and vector initialization
+        float test = 1.5;
+        std::vector<int> v{1, 3, 5};
+
+        //-- static const vector
+        static const std::vector<int> scv;
+
+
         void debug() {
             char buf[1024];
-            sprintf(buf, "addr : %x, id : %d, name : %s, p : %.2f",
+            sprintf(buf, "addr : %x, id : %d, name : %s, p : %.2f, test : %.2f, sInt : %d, vSize : %d",
                     this,
-                    id, name.c_str(), percentage);
+                    id, name.c_str(), percentage, test, sInt, v.size());
             My::debug(buf);
+            //-- compile error
+            //MY_CONT_FLOAT = 1;
+            sInt = 5;
         }
 
         ~Derived() {
             My::debug("~Derived");
         }
     };
+
+    //-- static initialization
+    int Derived::sInt = 10;
+    const std::vector<int> Derived::scv{1, 3, 5};
+
+
+    //vector<int> Derived::v{1, 3, 5};
+
+
 
     void debug(string &str) {
         debug(str.c_str());
@@ -121,6 +148,17 @@ namespace Test {
         sp->debug();
     }
 
+    void testLamda() {
+        auto func = [](int n) {return n*n;};
+
+        int result = func(5);
+        __android_log_print(ANDROID_LOG_INFO, TAG, "test Lamda : %d", result);
+
+        std:for_each(Derived::scv.begin(), Derived::scv.end(), [](auto n){
+            __android_log_print(ANDROID_LOG_INFO, TAG, "iteration : %d", n);
+        });
+    }
+
 }
 
 
@@ -137,6 +175,7 @@ Java_com_example_likebebop_jnitest_JniTest_testAll(JNIEnv *env, jobject instance
     testClass();
     testUniquePtr();
     testSharedPtr();
+    testLamda();
 
 }
 
