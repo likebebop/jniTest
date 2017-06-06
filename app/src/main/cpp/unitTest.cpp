@@ -43,7 +43,7 @@ namespace My {
     class Derived : public Base {
     public:
         Derived(int id, const char* name, float p) : Base(id), name(name), percentage(p) {
-            My::debug("Derived");
+            My::debug("(+)Derived");
         }
 
         //-- https://stackoverflow.com/questions/14116003/difference-between-constexpr-and-const
@@ -73,7 +73,7 @@ namespace My {
         }
 
         ~Derived() {
-            My::debug("~Derived");
+            My::debug("(-)Derived");
         }
     };
 
@@ -118,20 +118,25 @@ namespace Test {
     }
 
     void testUniquePtr() {
-        unique_ptr<int> p1(new int(5));
+        //unique_ptr<int> p1(new int(5));
+        __android_log_print(ANDROID_LOG_INFO, TAG, "=== pd begin ===");
 
-        // 복사생성이 허용되어 있지 않다. 컴파일 에러
-        //unique_ptr<int> p2 = p1;
+        {
+            unique_ptr<Derived> pd(new Derived(1, "bebbop", 100));
+            __android_log_print(ANDROID_LOG_INFO, TAG, "pd : %.2x", pd.get());
+            pd->debug();
+        }
 
-        // 소유권 이전 (p1 -> p3)
-        unique_ptr<int> p3 = std::move(p1);
+        __android_log_print(ANDROID_LOG_INFO, TAG, "=== pd end ===");
 
-        // 메모리 해제
-        // 굳이 이걸 호출하지 않더라도 스코프 종료시 메모리 해제된다
-        //p3.reset();
+        unique_ptr<Derived> pd(new Derived(1, "bebbop2", 200));
+        __android_log_print(ANDROID_LOG_INFO, TAG, "pd : %.2x", pd.get());
 
-        // 아무 것도 수행치 않는다
-        //p1.reset();
+        vector<unique_ptr<Derived>> v1;
+
+        v1.push_back(std::move(pd));
+
+        __android_log_print(ANDROID_LOG_INFO, TAG, "pd after move : %.2x", pd.get());
 
 
     }
@@ -148,22 +153,39 @@ namespace Test {
         sp->debug();
     }
 
-
-    auto multiply() {
+    //-- c++14
+   /* auto multiply() {
         return [](int n){return n*n;};
-    }
+    }*/
 
     void testLamda() {
         //-- https://stackoverflow.com/questions/7951377/what-is-the-type-of-lambda-when-deduced-with-auto-in-c11
         //-- 아래 두개 결과가 같다. auto로 파악하는듯
         //auto func = [](auto n)->float{return n*n/2.0;};
-        auto func = [](auto n){return n*n/2.0;};
+        auto func = [&](int n){return n*n/2.0;};
         float result = func(5);
         __android_log_print(ANDROID_LOG_INFO, TAG, "test Lamda : %.2f", result);
 
-        std:for_each(Derived::scv.begin(), Derived::scv.end(), [](auto n){
+
+       int idx = 7;
+       auto func2 = [&idx](int n){return idx*n;};
+       auto func3 = [=](int n){return idx*n;};
+
+       __android_log_print(ANDROID_LOG_INFO, TAG, "test lamda %d, %d", func2(10), func3(10));
+
+        //__android_log_print(ANDROID_LOG_INFO, TAG, "test Lamda by function : %d", multiply()(5));
+    }
+
+    void testLoop() {
+        std:for_each(Derived::scv.begin(), Derived::scv.end(), [](int n){
             __android_log_print(ANDROID_LOG_INFO, TAG, "iteration : %d", n);
         });
+
+        int total = 0;
+        for_each(Derived::scv.begin(), Derived::scv.end(), [&total](int n){
+            total += n;;
+        });
+        __android_log_print(ANDROID_LOG_INFO, TAG, "total : %d", total);
 
         //-- auto
         int idx = 0;
@@ -178,9 +200,6 @@ namespace Test {
             __android_log_print(ANDROID_LOG_INFO, TAG, "by auto ref : %d, %.2x, %.2x", i, &i, &Derived::scv[idx]);
             idx++;
         }
-
-
-        __android_log_print(ANDROID_LOG_INFO, TAG, "test Lamda by function : %d", multiply()(5));
     }
 
 }
@@ -197,9 +216,12 @@ Java_com_example_likebebop_jnitest_JniTest_testAll(JNIEnv *env, jobject instance
     testString();
     testStruct();
     testClass();
-    testUniquePtr();
     testSharedPtr();
+    testLoop();
     testLamda();
+
+    testUniquePtr();
+
 
 }
 
