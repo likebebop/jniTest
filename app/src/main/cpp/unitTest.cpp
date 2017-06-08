@@ -15,6 +15,10 @@ namespace My {
 
 namespace My {
 
+    enum class DistortionType {
+        none = 0, zoom_in, zoom_out, direction, ellipseZoomin, ellipseZoomout, ellipseDirection, uniformZoomInWithoutAdjustment, uniformZoomInWithAdjustment, uniformZoomOut
+    };
+
     struct BaseStruct {
         int id;
     };
@@ -42,6 +46,9 @@ namespace My {
 
     class Derived : public Base {
     public:
+        Derived()  : Base(0) {
+
+        }
         Derived(int id, const char* name, float p) : Base(id), name(name), percentage(p) {
             My::debug("(+)Derived");
         }
@@ -202,6 +209,25 @@ namespace Test {
         }
     }
 
+    void testEnum() {
+        int a = 1;
+
+        if (a == (int) DistortionType::zoom_in) {
+            __android_log_print(ANDROID_LOG_INFO, TAG, "enum hit : %d", DistortionType::zoom_in);
+        }
+
+        __android_log_print(ANDROID_LOG_INFO, TAG, "enum DistortionType : %d", DistortionType::direction);
+
+        Derived d;
+
+        /*if (d == nullptr) {
+            d = Derived(1, "bebop", 5.0);
+        }*/
+
+        d.debug();
+
+    }
+
 }
 
 
@@ -222,6 +248,7 @@ Java_com_example_likebebop_jnitest_JniTest_testAll(JNIEnv *env, jobject instance
 
     testUniquePtr();
 
+    testEnum();
 
 }
 

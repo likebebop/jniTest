@@ -1,6 +1,6 @@
 #include <jni.h>
 #include <string>
-
+#include "jniHelper.hpp"
 
 using namespace std;
 
@@ -12,8 +12,20 @@ Java_com_example_likebebop_jnitest_JniTest_getArrayFieldFromNative(JNIEnv *env, 
                                                                     jobject obj) {
 
     float result = 0.0f;
+
     jclass cls = env->GetObjectClass(obj);
 
+    std::pair<jobject, float*> array = JniHelper::getFloatArray(env, cls, obj, "floatArray");
+
+    jsize len = env->GetArrayLength(*reinterpret_cast<jfloatArray *>(&array.first));
+
+    for (int i = 0; i < len; ++i) {
+        result += array.second[i];
+    }
+
+    JniHelper::releaseFloatArray(env, array);
+
+    /*result = 0.0;
     // get field [F = Array of float
     jfieldID fieldId = env->GetFieldID(cls, "floatArray", "[F");
 
@@ -23,7 +35,7 @@ Java_com_example_likebebop_jnitest_JniTest_getArrayFieldFromNative(JNIEnv *env, 
     // Cast it to a jfloatarray
     jfloatArray *fArray = reinterpret_cast<jfloatArray *>(&objArray);
 
-    jsize len = env->GetArrayLength(*fArray);
+    len = env->GetArrayLength(*fArray);
 
     // Get the elements
     float *data = env->GetFloatArrayElements(*fArray, 0);
@@ -33,7 +45,7 @@ Java_com_example_likebebop_jnitest_JniTest_getArrayFieldFromNative(JNIEnv *env, 
     }
 
     // Don't forget to release it
-    env->ReleaseFloatArrayElements(*fArray, data, 0);
+    env->ReleaseFloatArrayElements(*fArray, data, 0);*/
 
     return result;
 
