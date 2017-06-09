@@ -14,7 +14,6 @@ Java_com_example_likebebop_jnitest_JniTest_getArrayFieldFromNative(JNIEnv *env, 
     float result = 0.0f;
 
     jclass cls = env->GetObjectClass(obj);
-
     std::pair<jobject, float*> array = JniHelper::getFloatArray(env, cls, obj, "floatArray");
 
     jsize len = env->GetArrayLength(*reinterpret_cast<jfloatArray *>(&array.first));
@@ -23,7 +22,39 @@ Java_com_example_likebebop_jnitest_JniTest_getArrayFieldFromNative(JNIEnv *env, 
         result += array.second[i];
     }
 
+    float test[len];
+
+    for (int i = 0; i < len; ++i) {
+        test[i] = i;
+    }
+
+    //std::copy(array.second)
+    memcpy(array.second, test, sizeof(test));
+
+    /*for (int i = 0; i < len; ++i) {
+        array.second[i] = i;
+    }*/
+
     JniHelper::releaseFloatArray(env, array);
+
+    /*int len = 5;
+    float test[len];
+
+    for (int i = 0; i < len; ++i) {
+        test[i] = i;
+    }
+
+    jfloatArray buffer;
+    buffer = env->NewFloatArray(len);
+
+    jfieldID fid = env->GetFieldID(cls, "floatArray", "[F");
+    jobject mvdata = env->GetObjectField(obj, fid);
+    jfloatArray *mShapeArray = reinterpret_cast<jfloatArray *>(&mvdata);
+    jfloat *mShape = env->GetFloatArrayElements(*mShapeArray, NULL);
+    env->SetFloatArrayRegion(*mShapeArray, 0, len, test);
+
+    env->ReleaseFloatArrayElements(*mShapeArray, mShape, 0);*/
+
 
     /*result = 0.0;
     // get field [F = Array of float
