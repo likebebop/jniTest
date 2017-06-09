@@ -228,6 +228,38 @@ namespace Test {
 
     }
 
+    class Singleton {
+    private:
+        Singleton();
+        /*Singleton(const Singleton& other) {};
+        ~Singleton() {};*/
+    public:
+        int count;
+        //static Singleton _instance;
+        inline static Singleton& instance() {
+            static Singleton instance;
+            return instance;
+        }
+
+        inline void debug() {
+            __android_log_print(ANDROID_LOG_INFO, TAG, "test : %d", count);
+        }
+
+    };
+
+    Singleton::Singleton() {
+        __android_log_print(ANDROID_LOG_INFO, TAG, "Singleton created");
+    }
+
+    //Singleton Singleton::_instance = Singleton();
+
+
+
+    void testSingleton() {
+        Singleton::instance().count++;
+        Singleton::instance().debug();
+    }
+
 }
 
 
@@ -249,7 +281,10 @@ Java_com_example_likebebop_jnitest_JniTest_testAll(JNIEnv *env, jobject instance
     testUniquePtr();
 
     testEnum();
-
+    __android_log_print(ANDROID_LOG_INFO, TAG, "Singleton begin");
+    testSingleton();
+    testSingleton();
+    testSingleton();
 }
 
 
