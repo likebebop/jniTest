@@ -27,12 +27,7 @@
     <bookmark url="file://$USER_HOME$/Library/Android/sdk/sources/android-25/java/lang/Object.java" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c52535a-6ee9-4977-bc27-f1d7acd168ea" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/cpp/jniHelper.hpp" afterPath="$PROJECT_DIR$/app/src/main/cpp/jniHelper.hpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/cpp/jniTest.cpp" afterPath="$PROJECT_DIR$/app/src/main/cpp/jniTest.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/likebebop/jnitest/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/likebebop/jnitest/MainActivity.java" />
-    </list>
+    <list default="true" id="7c52535a-6ee9-4977-bc27-f1d7acd168ea" name="Default" comment="" />
     <ignored path="jniTest.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -66,8 +61,8 @@
       <file leaf-file-name="jniTest.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/cpp/jniTest.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="31" column="45" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="45" />
+            <state relative-caret-position="225">
+              <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
@@ -2855,8 +2850,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/cpp/jniTest.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="31" column="45" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="45" />
+        <state relative-caret-position="225">
+          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
           <folding>
             <element signature="e#0#16#0" expanded="true" />
           </folding>
