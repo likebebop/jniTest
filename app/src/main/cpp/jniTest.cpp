@@ -3,6 +3,7 @@
 #include "jniHelper.hpp"
 
 using namespace std;
+using namespace JniHelper;
 
 extern "C" {
 
@@ -14,12 +15,12 @@ Java_com_example_likebebop_jnitest_JniTest_getArrayFieldFromNative(JNIEnv *env, 
     float result = 0.0f;
 
     jclass cls = env->GetObjectClass(obj);
-    std::pair<jobject, float*> array = JniHelper::getFloatArray(env, cls, obj, "floatArray");
+    FloatArrayWrapper array(env, cls, obj, "array");
 
-    jsize len = env->GetArrayLength(*reinterpret_cast<jfloatArray *>(&array.first));
+    jsize len = env->GetArrayLength(*reinterpret_cast<jfloatArray *>(&array.arrayObj));
 
     for (int i = 0; i < len; ++i) {
-        result += array.second[i];
+        result += array.array[i];
     }
 
     float test[len];
@@ -29,13 +30,13 @@ Java_com_example_likebebop_jnitest_JniTest_getArrayFieldFromNative(JNIEnv *env, 
     }
 
     //std::copy(array.second)
-    memcpy(array.second, test, sizeof(test));
+    memcpy(array.array, test, sizeof(test));
 
     /*for (int i = 0; i < len; ++i) {
         array.second[i] = i;
     }*/
 
-    JniHelper::releaseFloatArray(env, array);
+    //JniHelper::releaseFloatArray(env, array);
 
     /*int len = 5;
     float test[len];
@@ -47,7 +48,7 @@ Java_com_example_likebebop_jnitest_JniTest_getArrayFieldFromNative(JNIEnv *env, 
     jfloatArray buffer;
     buffer = env->NewFloatArray(len);
 
-    jfieldID fid = env->GetFieldID(cls, "floatArray", "[F");
+    jfieldID fid = env->GetFieldID(cls, "array", "[F");
     jobject mvdata = env->GetObjectField(obj, fid);
     jfloatArray *mShapeArray = reinterpret_cast<jfloatArray *>(&mvdata);
     jfloat *mShape = env->GetFloatArrayElements(*mShapeArray, NULL);
@@ -58,7 +59,7 @@ Java_com_example_likebebop_jnitest_JniTest_getArrayFieldFromNative(JNIEnv *env, 
 
     /*result = 0.0;
     // get field [F = Array of float
-    jfieldID fieldId = env->GetFieldID(cls, "floatArray", "[F");
+    jfieldID fieldId = env->GetFieldID(cls, "array", "[F");
 
     // Get the object field, returns JObject (because Array is instance of Object)
     jobject objArray = env->GetObjectField(obj, fieldId);

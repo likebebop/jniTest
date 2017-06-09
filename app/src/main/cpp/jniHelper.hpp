@@ -29,6 +29,15 @@ namespace JniHelper {
         return env->GetBooleanField(obj, env->GetFieldID(clazz, name, "Z"));
     }
 
+    class FloatArrayWrapper {
+    public:
+        FloatArrayWrapper(JNIEnv *env, jclass clazz, jobject obj, const char* name);
+        JNIEnv *env;
+        jobject arrayObj;
+        float* array;
+        virtual ~FloatArrayWrapper();
+    };
+
     inline std::pair<jobject, float*> getFloatArray(JNIEnv *env, jclass clazz, jobject obj, const char* name) {
         jfieldID fid = env->GetFieldID(clazz, name, "[F");
         jobject objArray = env->GetObjectField(obj, fid);
@@ -36,10 +45,6 @@ namespace JniHelper {
         float* pFloat = env->GetFloatArrayElements(*pFloatArray, 0);
         return std::make_pair(objArray, pFloat);
     };
-
-    inline jfloatArray& pairToFloatArray(std::pair<jobject , float*>& array) {
-        return *reinterpret_cast<jfloatArray *>(&array.first);
-    }
 
     inline void releaseFloatArray(JNIEnv *env, std::pair<jobject , float*>& array) {
         env->ReleaseFloatArrayElements(*reinterpret_cast<jfloatArray *>(&array.first), array.second, 0);
