@@ -1,8 +1,9 @@
 #include <jni.h>
 #include <string>
-
+#include "jniHelper.hpp"
 
 using namespace std;
+using namespace JniHelper;
 
 extern "C" {
 
@@ -12,29 +13,23 @@ Java_com_example_likebebop_jnitest_JniTest_getArrayFieldFromNative(JNIEnv *env, 
                                                                     jobject obj) {
 
     float result = 0.0f;
+
     jclass cls = env->GetObjectClass(obj);
+    FloatArrayWrapper array(env, cls, obj, "floatArray");
 
-    // get field [F = Array of float
-    jfieldID fieldId = env->GetFieldID(cls, "floatArray", "[F");
-
-    // Get the object field, returns JObject (because Array is instance of Object)
-    jobject objArray = env->GetObjectField(obj, fieldId);
-
-    // Cast it to a jfloatarray
-    jfloatArray *fArray = reinterpret_cast<jfloatArray *>(&objArray);
-
-    jsize len = env->GetArrayLength(*fArray);
-
-    // Get the elements
-    float *data = env->GetFloatArrayElements(*fArray, 0);
+    jsize len = env->GetArrayLength(*reinterpret_cast<jfloatArray *>(&array.arrayObj));
 
     for (int i = 0; i < len; ++i) {
-        result += data[i];
+        result += array.array[i];
     }
 
-    // Don't forget to release it
-    env->ReleaseFloatArrayElements(*fArray, data, 0);
+    float test[len];
 
+    for (int i = 0; i < len; ++i) {
+        test[i] = i;
+    }
+
+    memcpy(array.array, test, sizeof(test));
     return result;
 
 }

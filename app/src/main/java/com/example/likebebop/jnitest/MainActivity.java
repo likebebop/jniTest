@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
+import java.util.Arrays;
+
 public class MainActivity extends Activity {
 
 
@@ -22,9 +24,12 @@ public class MainActivity extends Activity {
         tv.setText(jni.stringFromJNI());
 
 
-        // access class member in native code and return result to caller
         MeshData obj = new MeshData(5);
+        Log.d(TAG, "=== before " + Arrays.toString(obj.floatArray));
         Log.d(TAG, "Result getArrayFieldFromNative: " + jni.getArrayFieldFromNative(obj));
+        Log.d(TAG, "=== after" + Arrays.toString(obj.floatArray));
+        Log.d(TAG, "Result getArrayFieldFromNative: " + jni.getArrayFieldFromNative(obj));
+        Log.d(TAG, "=== after" + Arrays.toString(obj.floatArray));
         Log.d(TAG, "Result getFieldFromNative: " + jni.getFieldFromNative(obj));
         Log.d(TAG, "Result invokeMemberFuncFromNative: " + jni.invokeMemberFuncFromNative(obj));
 
@@ -43,6 +48,9 @@ public class MainActivity extends Activity {
         Log.d(TAG, "Result processObjectArrayFromNative: " + arrayRes);
 
         jni.testAll();
+
+        // access class member in native code and return result to caller
+
     }
 
 

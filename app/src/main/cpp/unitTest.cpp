@@ -14,12 +14,15 @@ namespace My {
 }
 
 namespace My {
-
     //-- 선언은 에러번 올수 있다.
     class Base;
 
     class Base;
 
+    //-- scope enum
+    enum class DistortionType {
+        none = 0, zoom_in, zoom_out, direction, ellipseZoomin, ellipseZoomout, ellipseDirection, uniformZoomInWithoutAdjustment, uniformZoomInWithAdjustment, uniformZoomOut
+    };
 
     struct BaseStruct {
         int id;
@@ -52,6 +55,9 @@ namespace My {
 
     class Derived : public Base {
     public:
+        Derived()  : Base(0) {
+
+        }
         Derived(int id, const char* name, float p) : Base(id), name(name), percentage(p) {
             My::debug("(+)Derived");
         }
@@ -212,6 +218,57 @@ namespace Test {
         }
     }
 
+    void testEnum() {
+        int a = 1;
+
+        if (a == (int) DistortionType::zoom_in) {
+            __android_log_print(ANDROID_LOG_INFO, TAG, "enum hit : %d", DistortionType::zoom_in);
+        }
+
+        __android_log_print(ANDROID_LOG_INFO, TAG, "enum DistortionType : %d", DistortionType::direction);
+
+        Derived d;
+
+        /*if (d == nullptr) {
+            d = Derived(1, "bebop", 5.0);
+        }*/
+
+        d.debug();
+
+    }
+
+    class Singleton {
+    private:
+        Singleton();
+        /*Singleton(const Singleton& other) {};
+        ~Singleton() {};*/
+    public:
+        int count;
+        //static Singleton _instance;
+        inline static Singleton& instance() {
+            static Singleton instance;
+            return instance;
+        }
+
+        inline void debug() {
+            __android_log_print(ANDROID_LOG_INFO, TAG, "test : %d", count);
+        }
+
+    };
+
+    Singleton::Singleton() {
+        __android_log_print(ANDROID_LOG_INFO, TAG, "Singleton created");
+    }
+
+    //Singleton Singleton::_instance = Singleton();
+
+
+
+    void testSingleton() {
+        Singleton::instance().count++;
+        Singleton::instance().debug();
+    }
+
 }
 
 
@@ -232,7 +289,11 @@ Java_com_example_likebebop_jnitest_JniTest_testAll(JNIEnv *env, jobject instance
 
     testUniquePtr();
 
-
+    testEnum();
+    __android_log_print(ANDROID_LOG_INFO, TAG, "Singleton begin");
+    testSingleton();
+    testSingleton();
+    testSingleton();
 }
 
 
