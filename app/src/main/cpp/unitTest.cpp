@@ -115,16 +115,13 @@ namespace Test {
     public:
         Resource() {
         }
-        Resource(int length, unsigned char* c) : originalLength(length), compressed(compressed) {
-            this->compressed = (unsigned char*)malloc(sizeof(c));
-            memcpy(this->compressed, c, sizeof(c));
+        Resource(int length, vector<unsigned char> c) : originalLength(length), compressed(c) {
         }
 
         ~Resource() {
-            delete compressed;
         }
 
-        unsigned char* compressed;
+        vector<unsigned char> compressed;
         int originalLength;
         bool uncompressed = false;
     };
@@ -295,10 +292,9 @@ namespace Test {
 
 
     void testBinaryText() {
-
         //string frag((const allocator<char> &) passthrough_frag);
         //__android_log_print(ANDROID_LOG_INFO, TAG, (const char *) passthrough_frag, "");
-        resourceMap[TEST_KEY] = Resource(100, (unsigned char[]) {
+       resourceMap[TEST_KEY] = Resource(100, vector<unsigned char> {
                 0x23, 0x69, 0x66, 0x64, 0x65, 0x66, 0x20, 0x4f, 0x50, 0x45, 0x4e, 0x47,
                 0x4c, 0x5f, 0x45, 0x53, 0x0a, 0x23, 0x69, 0x66, 0x64, 0x65, 0x66, 0x20,
                 0x47, 0x4c, 0x5f, 0x46, 0x52, 0x41, 0x47, 0x4d, 0x45, 0x4e, 0x54, 0x5f,
@@ -344,7 +340,7 @@ namespace Test {
                 0x0a
         });
 
-        __android_log_print(ANDROID_LOG_INFO, TAG, "testBinaryText 1 => %s", resourceMap[TEST_KEY].compressed);
+        __android_log_print(ANDROID_LOG_INFO, TAG, "testBinaryText 1 => %s", &(resourceMap[TEST_KEY].compressed)[0]);
     }
 
 }
@@ -376,7 +372,7 @@ Java_com_example_likebebop_jnitest_JniTest_testAll(JNIEnv *env, jobject instance
     testSingleton();
     testBinaryText();
 
-    __android_log_print(ANDROID_LOG_INFO, TAG, "testBinaryText => %s", resourceMap[TEST_KEY].compressed);
+    __android_log_print(ANDROID_LOG_INFO, TAG, "testBinaryText => %s", &(resourceMap[TEST_KEY].compressed)[0]);
 
 }
 
