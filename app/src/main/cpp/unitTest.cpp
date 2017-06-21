@@ -46,12 +46,15 @@ namespace My {
     };
 
     class Base {
+
     public :
         Base(int id) {
             this->id = id;
+            _name = __func__;
         }
-
+        const char* _name;
         int id;
+        virtual const char* className() const { return typeid(*this).name(); }
     };
 
     class Derived : public Base {
@@ -92,6 +95,10 @@ namespace My {
         ~Derived() {
             My::debug("(-)Derived");
         }
+    };
+
+    class Derived2 : public Derived {
+
     };
 
     //-- static initialization
@@ -148,15 +155,18 @@ namespace Test {
         Derived s2 = s;
         Derived& ref = s;
         Base& base = ref;
+        Derived2 derived2;
+        Base* pb = &derived2;
         s.debug();
         s2.name = "test";
         s2.debug();
         ref.debug();
         ref.name = "hello bebop";
         s.debug();
-        __android_log_print(ANDROID_LOG_INFO, TAG, "=== typeid test (%s)", typeid(ref).name());
+        __android_log_print(ANDROID_LOG_INFO, TAG, "=== typeid test (%s, %s, %s)", typeid(ref).name(), ref._name, ref.className());
 
-        __android_log_print(ANDROID_LOG_INFO, TAG, "=== typeid test2 (%s)", typeid(base).name());
+        __android_log_print(ANDROID_LOG_INFO, TAG, "=== typeid test2 (%s, %s, %s)", typeid(base).name(), base._name, base.className());
+        __android_log_print(ANDROID_LOG_INFO, TAG, "=== typeid test3 (%s, %s, %s)", typeid(*pb).name(), pb->_name, pb->className());
 
     }
 
@@ -359,8 +369,6 @@ namespace Test {
 
 extern "C" {
 
-
-
 using namespace Test;
 
 JNIEXPORT void JNICALL
@@ -389,7 +397,6 @@ Java_com_example_likebebop_jnitest_JniTest_testAll(JNIEnv *env, jobject instance
 #ifdef _LOG
     __android_log_print(ANDROID_LOG_INFO, TAG, "=== _LOG OK ===");
 #endif
-
 
 }
 
