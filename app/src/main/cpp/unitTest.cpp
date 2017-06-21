@@ -27,13 +27,13 @@ namespace My {
 
     struct BaseStruct {
         int id;
+
     };
 
     struct Student {
         //-- static const init은 에러 발생시킨다, 대신 constexpr사용해야되는듯;
         //static const float t = 1.0;
         //static constexpr float test = 1.0;
-
         int id;
         string name;
         float percentage;
