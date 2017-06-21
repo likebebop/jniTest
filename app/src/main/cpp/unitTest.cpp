@@ -3,6 +3,7 @@
 #include <android/log.h>
 #include <vector>
 #include <map>
+#include <typeinfo>
 
 using namespace std;
 
@@ -146,12 +147,17 @@ namespace Test {
         Derived s = {1, "bebop", 0.5};
         Derived s2 = s;
         Derived& ref = s;
+        Base& base = ref;
         s.debug();
         s2.name = "test";
         s2.debug();
         ref.debug();
         ref.name = "hello bebop";
         s.debug();
+        __android_log_print(ANDROID_LOG_INFO, TAG, "=== typeid test (%s)", typeid(ref).name());
+
+        __android_log_print(ANDROID_LOG_INFO, TAG, "=== typeid test2 (%s)", typeid(base).name());
+
     }
 
     void testUniquePtr() {
@@ -195,6 +201,7 @@ namespace Test {
         return [](int n){return n*n;};
     }*/
 
+
     void testLamda() {
         //-- https://stackoverflow.com/questions/7951377/what-is-the-type-of-lambda-when-deduced-with-auto-in-c11
         //-- 아래 두개 결과가 같다. auto로 파악하는듯
@@ -209,6 +216,8 @@ namespace Test {
        auto func3 = [=](int n){return idx*n;};
 
        __android_log_print(ANDROID_LOG_INFO, TAG, "test lamda %d, %d", func2(10), func3(10));
+
+
 
         //__android_log_print(ANDROID_LOG_INFO, TAG, "test Lamda by function : %d", multiply()(5));
     }
@@ -340,6 +349,7 @@ namespace Test {
                 0x0a
         });
 
+        __android_log_print(ANDROID_LOG_INFO, TAG, "testBinaryText => %d", resourceMap[TEST_KEY].compressed.size());
         __android_log_print(ANDROID_LOG_INFO, TAG, "testBinaryText 1 => %s", &(resourceMap[TEST_KEY].compressed)[0]);
     }
 
@@ -358,10 +368,10 @@ Java_com_example_likebebop_jnitest_JniTest_testAll(JNIEnv *env, jobject instance
 
     testString();
     testStruct();
-    testClass();
+
     testSharedPtr();
     testLoop();
-    testLamda();
+
 
     testUniquePtr();
 
@@ -373,6 +383,13 @@ Java_com_example_likebebop_jnitest_JniTest_testAll(JNIEnv *env, jobject instance
     testBinaryText();
 
     __android_log_print(ANDROID_LOG_INFO, TAG, "testBinaryText => %s", &(resourceMap[TEST_KEY].compressed)[0]);
+
+    testLamda();
+    testClass();
+#ifdef _LOG
+    __android_log_print(ANDROID_LOG_INFO, TAG, "=== _LOG OK ===");
+#endif
+
 
 }
 
