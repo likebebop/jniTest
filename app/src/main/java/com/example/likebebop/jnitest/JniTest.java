@@ -10,7 +10,7 @@ public class JniTest {
         System.loadLibrary("native-lib");
     }
 
-    static public String getStringFromJava(int id) {
+    public String getStringFromJava(int id) {
         return "hello java " + id;
     }
 
