@@ -10,10 +10,15 @@ public class JniTest {
         System.loadLibrary("native-lib");
     }
 
+    static public String getStringFromJava(int id) {
+        return "hello java " + id;
+    }
 
     public native void testAll();
 
     public native String stringFromJNI();
+
+    static public native void putString(String s);
 
     public native float getArrayFieldFromNative(MeshData obj);
     public native int invokeMemberFuncFromNative(MeshData obj);

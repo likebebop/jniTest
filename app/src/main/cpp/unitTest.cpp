@@ -138,11 +138,23 @@ namespace Test {
 
     static string TEST_KEY = "./res/shaders/passthrough.frag";
 
+    string cstrToString(const char *str) {
+        return (str == nullptr) ?  string() : string(str);
+    }
+
     extern unsigned char passthrough_frag[];
     void testString() {
         debug("==== 웁스 =====");
         string s = "aa";
         debug(s.append(" bb"));
+
+
+        string a = cstrToString(NULL);
+        debug(a);
+        debug("");
+
+        a = cstrToString("ha");
+        debug(a);
     }
 
     void testStruct() {
@@ -374,7 +386,7 @@ using namespace Test;
 JNIEXPORT void JNICALL
 Java_com_example_likebebop_jnitest_JniTest_testAll(JNIEnv *env, jobject instance) {
 
-    testString();
+
     testStruct();
 
     testSharedPtr();
@@ -397,6 +409,8 @@ Java_com_example_likebebop_jnitest_JniTest_testAll(JNIEnv *env, jobject instance
 #ifdef _LOG
     __android_log_print(ANDROID_LOG_INFO, TAG, "=== _LOG OK ===");
 #endif
+
+    testString();
 
 }
 

@@ -21,17 +21,17 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            /*externalNativeBuild {
+            externalNativeBuild {
                 cmake {
                     arguments "-D_LOG=FALSE"
                 }
-            }*/
+            }
         }
         debug {
             jniDebuggable true
             externalNativeBuild {
                 cmake {
-                    arguments "-D_LOG=FALSE"
+                    arguments "-D_LOG=TRUE"
                 }
             }
         }

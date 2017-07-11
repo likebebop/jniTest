@@ -2,6 +2,15 @@
 #include <string>
 #include "jniHelper.hpp"
 
+JNIEXPORT void JNICALL
+Java_com_example_likebebop_jnitest_JniTest_putString(JNIEnv *env, jclass type, jstring s_) {
+    const char *s = env->GetStringUTFChars(s_, 0);
+
+    // TODO
+
+    env->ReleaseStringUTFChars(s_, s);
+}
+
 using namespace std;
 using namespace JniHelper;
 
