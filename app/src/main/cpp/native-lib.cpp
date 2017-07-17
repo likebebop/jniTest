@@ -21,10 +21,13 @@ Java_com_example_likebebop_jnitest_JniTest_stringFromJNI(
     jmethodID mid;
     cls = env->FindClass("com/example/likebebop/jnitest/JniTest");
     mid = env->GetMethodID(cls, "getStringFromJava", "(I)Ljava/lang/String;");
-    jstring str = (jstring)env->CallObjectMethod(obj, mid, 5);
+    jstring str = (jstring) env->CallObjectMethod(obj, mid, 5);
     const char *s = env->GetStringUTFChars(str, 0);
     env->ReleaseStringUTFChars(str, s);
     return env->NewStringUTF(s);
 }
+}
 
-};
+
+
+
