@@ -148,8 +148,8 @@
       <file leaf-file-name="unitTest.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/cpp/unitTest.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="158" column="11" selection-start-line="156" selection-start-column="10" selection-end-line="158" selection-end-column="11" />
+            <state relative-caret-position="155">
+              <caret line="150" column="23" selection-start-line="150" selection-start-column="8" selection-end-line="150" selection-end-column="23" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
                 <marker date="1500345196000" expanded="true" signature="3799:3847" ph="..." />
@@ -2936,8 +2936,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/cpp/unitTest.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="158" column="11" selection-start-line="156" selection-start-column="10" selection-end-line="158" selection-end-column="11" />
+        <state relative-caret-position="155">
+          <caret line="150" column="23" selection-start-line="150" selection-start-column="8" selection-end-line="150" selection-end-column="23" />
           <folding>
             <element signature="e#0#16#0" expanded="true" />
             <marker date="1500345196000" expanded="true" signature="3799:3847" ph="..." />
