@@ -3,9 +3,14 @@
 #include <android/log.h>
 #include <vector>
 #include <map>
-#include <typeinfo>
+#include "HandyRx.hpp"
+
 
 using namespace std;
+
+using namespace HandyRx;
+
+
 
 namespace My {
     static const char* TAG = "likebebop";
@@ -13,6 +18,8 @@ namespace My {
         __android_log_print(ANDROID_LOG_INFO, TAG, s, "");
     }
 }
+
+
 
 namespace My {
     //-- 선언은 에러번 올수 있다.
@@ -30,6 +37,10 @@ namespace My {
 
     };
 
+    /*void onValue2(int& v) {
+        __android_log_print(ANDROID_LOG_INFO, TAG, "=== onValue2 %d", v);
+    }*/
+
     struct Student {
         //-- static const init은 에러 발생시킨다, 대신 constexpr사용해야되는듯;
         //static const float t = 1.0;
@@ -38,10 +49,24 @@ namespace My {
         string name;
         float percentage;
 
+        void onV(int& v) {
+            __android_log_print(ANDROID_LOG_INFO, TAG, "=== onV %d, %s", v, name.c_str());
+        }
+
         void debug() {
             char buf[1024];
             sprintf(buf, "id : %d, name : %s, p : %.2f", id, name.c_str(), percentage);
             My::debug(buf);
+            BehaviorSubject<int> s = BehaviorSubject<int>(1).distinctUntilChanged();
+            s.subscribe([&](int& v) {
+                __android_log_print(ANDROID_LOG_INFO, TAG, "=== onValue3 %d, %s", v, this->name.c_str());
+                this->onV(v);
+            });
+            //s.subscribe(onValue);
+            s.onNext(3);
+            s.onNext(3);
+            s.onNext(5);
+            s.onNext(3);
         }
     };
 
@@ -118,6 +143,34 @@ namespace My {
 namespace Test {
     using namespace My;
 
+    void onValue(int& v) {
+        __android_log_print(ANDROID_LOG_INFO, TAG, "=== onValue %d", v);
+    }
+
+    void testHandyRx() {
+        BehaviorSubject<int> s = BehaviorSubject<int>(1).distinctUntilChanged();
+        //BehaviorSubject<int> s = BehaviorSubject<int>(1);
+        //onValue;
+        std::function<void(int&)> f = onValue;
+        std::function<void(int&)> f2 = onValue;
+
+//        if (f == f2) {
+//            return;
+//        }
+
+        Subscription<int> sub1 = s.subscribe(onValue);
+        Subscription<int> sub2 = s.subscribe(onValue);
+        s.onNext(3);
+        s.onNext(3);
+        s.onNext(5);
+        s.onNext(3);
+
+        sub1.unsubscribe();
+        s.onNext(5);
+
+
+    }
+
 
     class Resource {
     public:
@@ -160,6 +213,7 @@ namespace Test {
     void testStruct() {
         Student s = {1, "bebop", 0.5};
         s.debug();
+
     }
 
     void testClass() {
@@ -387,30 +441,31 @@ JNIEXPORT void JNICALL
 Java_com_example_likebebop_jnitest_JniTest_testAll(JNIEnv *env, jobject instance) {
 
 
-    testStruct();
-
-    testSharedPtr();
-    testLoop();
-
-
-    testUniquePtr();
-
-    testEnum();
-    __android_log_print(ANDROID_LOG_INFO, TAG, "Singleton begin");
-    testSingleton();
-    testSingleton();
-    testSingleton();
-    testBinaryText();
-
-    __android_log_print(ANDROID_LOG_INFO, TAG, "testBinaryText => %s", &(resourceMap[TEST_KEY].compressed)[0]);
-
-    testLamda();
-    testClass();
-#ifdef _LOG
-    __android_log_print(ANDROID_LOG_INFO, TAG, "=== _LOG OK ===");
-#endif
-
-    testString();
+    testHandyRx();
+   // testStruct();
+//
+//    testSharedPtr();
+//    testLoop();
+//
+//
+//    testUniquePtr();
+//
+//    testEnum();
+//    __android_log_print(ANDROID_LOG_INFO, TAG, "Singleton begin");
+//    testSingleton();
+//    testSingleton();
+//    testSingleton();
+//    testBinaryText();
+//
+//    __android_log_print(ANDROID_LOG_INFO, TAG, "testBinaryText => %s", &(resourceMap[TEST_KEY].compressed)[0]);
+//
+//    testLamda();
+//    testClass();
+//#ifdef _LOG
+//    __android_log_print(ANDROID_LOG_INFO, TAG, "=== _LOG OK ===");
+//#endif
+//
+//    testString();
 
 }
 

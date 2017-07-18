@@ -14,6 +14,7 @@ IF(DEFINED _LOG AND ${_LOG})
     add_definitions(-D_LOG)
 ENDIF()
 
+file(GLOB CPP_FILES "src/main/cpp/*.cpp")
 
 add_library( # Sets the name of the library.
              native-lib
@@ -22,7 +23,7 @@ add_library( # Sets the name of the library.
              SHARED
 
              # Provides a relative path to your source file(s).
-             src/main/cpp/native-lib.cpp src/main/cpp/jniTest.cpp src/main/cpp/unitTest.cpp src/main/cpp/jniHelper.cpp)
+             ${CPP_FILES})
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
