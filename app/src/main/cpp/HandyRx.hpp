@@ -16,14 +16,23 @@ namespace HandyRx {
 
     template <class T>
     class Subscription {
+    private:
         BehaviorSubject<T>& owner;
-        std::shared_ptr<std::function<void(int&)>> observer;
+        std::shared_ptr<std::function<void(T&)>> observer;
+        bool unsubscribed = false;
     public:
-        Subscription(BehaviorSubject<T>& owner, std::shared_ptr<std::function<void(int&)>> observer) : owner(owner), observer(observer){
+        Subscription(BehaviorSubject<T>& owner, std::shared_ptr<std::function<void(T&)>> observer) : owner(owner), observer(observer){
+        }
+        ~Subscription() {
+            unsubscribe();
         }
 
         void unsubscribe() {
+            if (unsubscribed) {
+                return;
+            }
             owner.unsubscribe(observer);
+            unsubscribed = true;
         }
     };
 
@@ -32,7 +41,7 @@ namespace HandyRx {
     private:
         //-- https://stackoverflow.com/questions/4584685/vector-of-stdfunction
         //-- std::function이 operator==가 제대로 안됨 허허허..
-        std::vector<std::shared_ptr<std::function<void(int&)>>> observers;
+        std::vector<std::shared_ptr<std::function<void(T&)>>> observers;
         T value;
         bool distinct = false;
         void notifyChanged() {
@@ -53,13 +62,13 @@ namespace HandyRx {
             return *this;
         }
 
-        inline Subscription<T> subscribe(std::function<void(T&)> observer) {
-            std::shared_ptr<std::function<void(int&)>> o = std::shared_ptr<std::function<void(int&)>>(new std::function<void(int&)>(observer));
+        Subscription<T> subscribe(std::function<void(T&)> observer) {
+            std::shared_ptr<std::function<void(T&)>> o = std::shared_ptr<std::function<void(T&)>>(new std::function<void(T&)>(observer));
             observers.push_back(o);
             return Subscription<T>(*this, o);
         }
 
-        inline void unsubscribe(std::shared_ptr<std::function<void(int&)>> observer) {
+        void unsubscribe(std::shared_ptr<std::function<void(T&)>> observer) {
             observers.erase(std::remove(observers.begin(), observers.end(), observer), observers.end());
         }
 
