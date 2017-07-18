@@ -17,9 +17,9 @@ namespace HandyRx {
     template <class T>
     class Subscription {
         BehaviorSubject<T>& owner;
-        std::function<void(T&)> observer;
+        std::shared_ptr<std::function<void(int&)>> observer;
     public:
-        Subscription(BehaviorSubject<T>& owner, std::function<void(T&)> observer) : owner(owner), observer(observer){
+        Subscription(BehaviorSubject<T>& owner, std::shared_ptr<std::function<void(int&)>> observer) : owner(owner), observer(observer){
         }
 
         void unsubscribe() {
@@ -30,12 +30,12 @@ namespace HandyRx {
     template <class T>
     class BehaviorSubject {
     private:
-        std::vector<std::function<void(T&)>> observers;
+        std::vector<std::shared_ptr<std::function<void(int&)>>> observers;
         T value;
         bool distinct = false;
         void notifyChanged() {
             for (auto& f : observers) {
-                f(value);
+                (*f.get())(value);
             }
         }
     public:
@@ -52,26 +52,13 @@ namespace HandyRx {
         }
 
         inline Subscription<T> subscribe(std::function<void(T&)> observer) {
-            observers.push_back(observer);
-            return Subscription<T>(*this, observer);
+            std::shared_ptr<std::function<void(int&)>> o = std::shared_ptr<std::function<void(int&)>>(new std::function<void(int&)>(observer));
+            observers.push_back(o);
+            return Subscription<T>(*this, o);
         }
 
-        inline void unsubscribe(std::function<void(T&)> observer) {
-            //const std::vector<std::function<void(T &)>>::iterator &p = std::find(observers.begin(), observers.end(), observer);
-//            int idx = 0;
-//            for (auto o : observers) {
-//                if (o == observer) {
-//                    observers.erase(observers.begin() + idx);
-//                    break;
-//                }
-//                idx++;
-//            }
-            //observers.begin();
-           // std::find(observers.begin(), observers.end(), observer);
-//            if (p != observers.end()) {
-//                observers.erase(p);
-//            }
-            //observers.erase(std::remove(observers.begin(), observers.end(), observer), observers.end());
+        inline void unsubscribe(std::shared_ptr<std::function<void(int&)>> observer) {
+            observers.erase(std::remove(observers.begin(), observers.end(), observer), observers.end());
         }
 
         void onNext(T t) {

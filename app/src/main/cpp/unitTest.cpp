@@ -147,15 +147,30 @@ namespace Test {
         __android_log_print(ANDROID_LOG_INFO, TAG, "=== onValue %d", v);
     }
 
+    //template <class T>
+    //typedef std::shared_ptr<std::function<void(T&)>> functionPointer;
+
     void testHandyRx() {
         BehaviorSubject<int> s = BehaviorSubject<int>(1).distinctUntilChanged();
         //BehaviorSubject<int> s = BehaviorSubject<int>(1);
         //onValue;
-        std::function<void(int&)> f = onValue;
-        std::function<void(int&)> f2 = onValue;
+
+        std::shared_ptr<std::function<void(int&)>> f = std::shared_ptr<std::function<void(int&)>>(new std::function<void(int&)>(onValue));
+
+        std::shared_ptr<std::function<void(int&)>> f2 = std::shared_ptr<std::function<void(int&)>>(new std::function<void(int&)>(onValue));
 
 //        if (f == f2) {
+//            __android_log_print(ANDROID_LOG_INFO, TAG, "=== pointer equals ===");
 //            return;
+//        }
+
+//        std::function<void(int&)> f3 = onValue;
+//        std::function<void(int&)>& f4 = f3;
+//
+//        //std::shared_ptr<std::function<void(int&)>> f2 = new std::function<void(int&)>(onValue);
+//
+//        if (f4 == f4) {
+//            __android_log_print(ANDROID_LOG_INFO, TAG, "=== pointer equals ===");
 //        }
 
         Subscription<int> sub1 = s.subscribe(onValue);
@@ -167,8 +182,6 @@ namespace Test {
 
         sub1.unsubscribe();
         s.onNext(5);
-
-
     }
 
 
