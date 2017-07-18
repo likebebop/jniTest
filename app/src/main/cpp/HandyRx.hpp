@@ -30,6 +30,8 @@ namespace HandyRx {
     template <class T>
     class BehaviorSubject {
     private:
+        //-- https://stackoverflow.com/questions/4584685/vector-of-stdfunction
+        //-- std::function이 operator==가 제대로 안됨 허허허..
         std::vector<std::shared_ptr<std::function<void(int&)>>> observers;
         T value;
         bool distinct = false;
