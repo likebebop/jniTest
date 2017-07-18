@@ -49,13 +49,24 @@ namespace My {
         string name;
         float percentage;
 
+
+        string& getName() {
+            return name;
+        }
+
+        inline string& getNameByInline() {
+            return name;
+        }
+
         void onV(int& v) {
             __android_log_print(ANDROID_LOG_INFO, TAG, "=== onV %d, %s", v, name.c_str());
         }
 
         void debug() {
             char buf[1024];
-            sprintf(buf, "id : %d, name : %s, p : %.2f", id, name.c_str(), percentage);
+            sprintf(buf, "id : %d, name : %s, p : %.2f, addr of getName : %0x, addr of getNameByInline : %0x", id, name.c_str(), percentage, &(getName()), &(getNameByInline()));
+            My::debug(buf);
+            sprintf(buf, "== id : %d, name : %s, p : %.2f, addr of getName : %0x, addr of getNameByInline : %0x", id, name.c_str(), percentage, &(getName()), &(getNameByInline()));
             My::debug(buf);
             BehaviorSubject<int> s = BehaviorSubject<int>(1).distinctUntilChanged();
             s.subscribe([&](int& v) {
@@ -226,6 +237,9 @@ namespace Test {
     void testStruct() {
         Student s = {1, "bebop", 0.5};
         s.debug();
+        char buf[1024];
+        sprintf(buf, "* id : %d, name : %s, p : %.2f, addr of getName : %0x, addr of getNameByInline : %0x", s.id, s.name.c_str(), s.percentage, &(s.getName()), &(s.getNameByInline()));
+        My::debug(buf);
 
     }
 
@@ -454,8 +468,8 @@ JNIEXPORT void JNICALL
 Java_com_example_likebebop_jnitest_JniTest_testAll(JNIEnv *env, jobject instance) {
 
 
-    testHandyRx();
-   // testStruct();
+    //testHandyRx();
+    testStruct();
 //
 //    testSharedPtr();
 //    testLoop();
