@@ -32,11 +32,7 @@
     <bookmark url="file://$USER_HOME$/Library/Android/sdk/sources/android-25/java/lang/Object.java" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c52535a-6ee9-4977-bc27-f1d7acd168ea" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/cpp/unitTest.cpp" afterPath="$PROJECT_DIR$/app/src/main/cpp/unitTest.cpp" />
-    </list>
+    <list default="true" id="7c52535a-6ee9-4977-bc27-f1d7acd168ea" name="Default" comment="" />
     <ignored path="jniTest.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
