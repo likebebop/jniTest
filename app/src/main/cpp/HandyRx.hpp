@@ -14,24 +14,32 @@ namespace HandyRx {
     template <class T>
     class BehaviorSubject;
 
+    static const char* TAG2 = "likebebop";
+
     template <class T>
     class Subscription {
     private:
-        BehaviorSubject<T>& owner;
+        BehaviorSubject<T>* owner = nullptr;
         std::shared_ptr<std::function<void(T&)>> observer;
         bool unsubscribed = false;
     public:
-        Subscription(BehaviorSubject<T>& owner, std::shared_ptr<std::function<void(T&)>> observer) : owner(owner), observer(observer){
+        Subscription() : unsubscribed(true) {
+            __android_log_print(ANDROID_LOG_INFO, TAG2, "===(+) Subscription %0x", this);
+        }
+
+        Subscription(BehaviorSubject<T>* owner, std::shared_ptr<std::function<void(T&)>> observer) : owner(owner), observer(observer){
+            __android_log_print(ANDROID_LOG_INFO, TAG2, "===(+) Subscription2 %0x", this);
         }
         ~Subscription() {
             unsubscribe();
         }
 
         void unsubscribe() {
-            if (unsubscribed) {
+            __android_log_print(ANDROID_LOG_INFO, TAG2, "=== unsubscribe %0x", this);
+            if (unsubscribed || !owner) {
                 return;
             }
-            owner.unsubscribe(observer);
+            owner->unsubscribe(observer);
             unsubscribed = true;
         }
     };
@@ -53,11 +61,11 @@ namespace HandyRx {
         BehaviorSubject(T t) : value(t) {
         };
 
-        inline T& getValue() {
+        T& getValue() {
             return value;
         }
 
-        inline BehaviorSubject& distinctUntilChanged() {
+        BehaviorSubject& distinctUntilChanged() {
             distinct = true;
             return *this;
         }
@@ -65,7 +73,11 @@ namespace HandyRx {
         Subscription<T> subscribe(std::function<void(T&)> observer) {
             std::shared_ptr<std::function<void(T&)>> o = std::shared_ptr<std::function<void(T&)>>(new std::function<void(T&)>(observer));
             observers.push_back(o);
-            return Subscription<T>(*this, o);
+            return Subscription<T>(this, o);
+        }
+
+        std::shared_ptr<Subscription<T>> subscribeShared(std::function<void(T&)> observer) {
+            return std::shared_ptr<Subscription<T>>(new Subscription<T>(subscribe(observer)));
         }
 
         void unsubscribe(std::shared_ptr<std::function<void(T&)>> observer) {

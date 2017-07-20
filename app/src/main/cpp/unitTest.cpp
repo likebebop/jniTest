@@ -41,14 +41,21 @@ namespace My {
         __android_log_print(ANDROID_LOG_INFO, TAG, "=== onValue2 %d", v);
     }*/
 
-    struct Student {
+    class Student {
+    public:
         //-- static const init은 에러 발생시킨다, 대신 constexpr사용해야되는듯;
         //static const float t = 1.0;
         //static constexpr float test = 1.0;
         int id;
         string name;
         float percentage;
+        BehaviorSubject<int> myBehavior = BehaviorSubject<int>(5).distinctUntilChanged();
 
+        shared_ptr<Subscription<int>> mySub = nullptr;
+
+        Student() {
+
+        }
 
         string& getName() {
             return name;
@@ -68,16 +75,22 @@ namespace My {
             My::debug(buf);
             sprintf(buf, "== id : %d, name : %s, p : %.2f, addr of getName : %0x, addr of getNameByInline : %0x", id, name.c_str(), percentage, &(getName()), &(getNameByInline()));
             My::debug(buf);
-            BehaviorSubject<int> s = BehaviorSubject<int>(1).distinctUntilChanged();
-            s.subscribe([&](int& v) {
-                __android_log_print(ANDROID_LOG_INFO, TAG, "=== onValue3 %d, %s", v, this->name.c_str());
-                this->onV(v);
+//            BehaviorSubject<int> s = BehaviorSubject<int>(1).distinctUntilChanged();
+//            s.subscribe([&](int& v) {
+//                __android_log_print(ANDROID_LOG_INFO, TAG, "=== onValue3 %d, %s", v, this->name.c_str());
+//                this->onV(v);
+//            });
+//            //s.subscribe(onValue);
+//            s.onNext(3);
+//            s.onNext(3);
+//            s.onNext(5);
+//            s.onNext(3);
+        }
+
+        void observe() {
+            mySub = myBehavior.subscribeShared([&](int&v) {
+                __android_log_print(ANDROID_LOG_INFO, TAG, "on myBehavior : %d", v);
             });
-            //s.subscribe(onValue);
-            s.onNext(3);
-            s.onNext(3);
-            s.onNext(5);
-            s.onNext(3);
         }
     };
 
@@ -235,11 +248,14 @@ namespace Test {
     }
 
     void testStruct() {
-        Student s = {1, "bebop", 0.5};
+        Student s;
         s.debug();
         char buf[1024];
         sprintf(buf, "* id : %d, name : %s, p : %.2f, addr of getName : %0x, addr of getNameByInline : %0x", s.id, s.name.c_str(), s.percentage, &(s.getName()), &(s.getNameByInline()));
         My::debug(buf);
+        s.observe();
+        s.myBehavior.onNext(10);
+        s.myBehavior.onNext(11);
 
     }
 
