@@ -32,6 +32,7 @@ namespace HandyRx {
         }
         ~Subscription() {
             unsubscribe();
+            __android_log_print(ANDROID_LOG_INFO, TAG2, "===(-) Subscription %0x", this);
         }
 
         void unsubscribe() {

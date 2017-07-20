@@ -90,6 +90,7 @@ namespace My {
         void observe() {
             mySub = myBehavior.subscribeShared([&](int&v) {
                 __android_log_print(ANDROID_LOG_INFO, TAG, "on myBehavior : %d", v);
+                this->onV(v);
             });
         }
     };
@@ -256,7 +257,8 @@ namespace Test {
         s.observe();
         s.myBehavior.onNext(10);
         s.myBehavior.onNext(11);
-
+        s.observe();
+        s.myBehavior.onNext(12);
     }
 
     void testClass() {
