@@ -8,6 +8,7 @@
 
 using namespace std;
 
+
 using namespace HandyRx;
 
 
@@ -246,6 +247,51 @@ namespace Test {
 
         a = cstrToString("ha");
         debug(a);
+    }
+
+    enum CallbackType : int {
+        INIT,
+        FINAL,
+        FRAME_READY,
+        RESET,
+        BUFFER_SIZE_CHANGED,
+        ASPECT_RATIO_CHANGED,
+    };
+
+    static const vector<const char*> callbackNames = {
+        "initialize",
+        "finalize",
+        "frameReady",
+        "reset",
+        "onBufferSizeChanged",
+        "onAspectRatioChanged",
+    };
+
+    class LuaCallback {
+    public:
+        bool hasCallback = false;
+        const char* name = nullptr;
+        LuaCallback(const char* name) : name(name) {
+        }
+        ~LuaCallback() {
+            __android_log_print(ANDROID_LOG_INFO, TAG, "~LuaCallback  (%s)", name);
+        }
+        void debug() {
+            __android_log_print(ANDROID_LOG_INFO, TAG, "=== LuaCallback  (%s)", name);
+        }
+    };
+
+    void testVector() {
+        map<CallbackType, shared_ptr<LuaCallback>> callMap;
+        int i = 0;
+        for (auto& name : callbackNames) {
+            callMap[(CallbackType)i] = shared_ptr<LuaCallback>(new LuaCallback(name));
+            i++;
+        }
+
+        for (auto& call : callMap) {
+            call.second->debug();
+        }
     }
 
     void testStruct() {
@@ -488,6 +534,7 @@ Java_com_example_likebebop_jnitest_JniTest_testAll(JNIEnv *env, jobject instance
 
     //testHandyRx();
     testStruct();
+    testVector();
 //
 //    testSharedPtr();
 //    testLoop();
