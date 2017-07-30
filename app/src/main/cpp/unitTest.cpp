@@ -143,6 +143,8 @@ namespace My {
             sInt = 5;
         }
 
+        virtual const char* className() const override  { return typeid(*this).name(); }
+
         ~Derived() {
             My::debug("(-)Derived");
         }
