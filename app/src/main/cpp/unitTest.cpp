@@ -212,6 +212,24 @@ namespace Test {
         s.onNext(5);
     }
 
+    void testPublishSubject() {
+        PublishSubject<int> s = PublishSubject<int>();
+
+        std::shared_ptr<std::function<void(int&)>> f = std::shared_ptr<std::function<void(int&)>>(new std::function<void(int&)>(onValue));
+
+        std::shared_ptr<std::function<void(int&)>> f2 = std::shared_ptr<std::function<void(int&)>>(new std::function<void(int&)>(onValue));
+        s.onNext(1);
+        Subscription<int> sub1 = s.subscribe(onValue);
+        Subscription<int> sub2 = s.subscribe(onValue);
+        s.onNext(3);
+        s.onNext(3);
+        s.onNext(5);
+        s.onNext(3);
+
+        sub1.unsubscribe();
+        s.onNext(5);
+    }
+
 
     class Resource {
     public:
@@ -308,8 +326,8 @@ namespace Test {
         s.observe();
         s.myBehavior.onNext(12);
 
-//        PublishSubject<int> test = PublishSubject();
-//        test.onNext(1);
+        PublishSubject<int> test = PublishSubject<int>();
+        test.onNext(1);
     }
 
     void testClass() {
@@ -537,9 +555,9 @@ JNIEXPORT void JNICALL
 Java_com_example_likebebop_jnitest_JniTest_testAll(JNIEnv *env, jobject instance) {
 
 
-    //testHandyRx();
-    testStruct();
-    testVector();
+    testPublishSubject();
+    //testStruct();
+    //testVector();
 //
 //    testSharedPtr();
 //    testLoop();
