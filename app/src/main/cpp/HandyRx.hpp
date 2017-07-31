@@ -11,10 +11,6 @@
 
 namespace HandyRx {
 
-    static const char* TAG2 = "likebebop";
-    template <class T>
-    class BehaviorSubject;
-
     template <class T>
     using FuncPt = std::function<void(T&)>;
 
@@ -32,19 +28,15 @@ namespace HandyRx {
         bool unsubscribed = false;
     public:
         Subscription() : unsubscribed(true) {
-            __android_log_print(ANDROID_LOG_INFO, TAG2, "===(+) Subscription %0x", this);
         }
 
         Subscription(Unsubscribable<T>* owner, std::shared_ptr<FuncPt<T>> observer) : owner(owner), observer(observer){
-            __android_log_print(ANDROID_LOG_INFO, TAG2, "===(+) Subscription2 %0x", this);
         }
         ~Subscription() {
             unsubscribe();
-            __android_log_print(ANDROID_LOG_INFO, TAG2, "===(-) Subscription %0x", this);
         }
 
         void unsubscribe() {
-            __android_log_print(ANDROID_LOG_INFO, TAG2, "=== unsubscribe %0x", this);
             if (unsubscribed || !owner) {
                 return;
             }
