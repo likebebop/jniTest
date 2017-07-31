@@ -307,6 +307,9 @@ namespace Test {
         s.myBehavior.onNext(11);
         s.observe();
         s.myBehavior.onNext(12);
+
+//        PublishSubject<int> test = PublishSubject();
+//        test.onNext(1);
     }
 
     void testClass() {

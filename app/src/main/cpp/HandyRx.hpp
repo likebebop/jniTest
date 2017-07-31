@@ -22,14 +22,14 @@ namespace HandyRx {
     class Subscription {
     private:
         BehaviorSubject<T>* owner = nullptr;
-        std::shared_ptr<FuncPt> observer;
+        std::shared_ptr<FuncPt<T>> observer;
         bool unsubscribed = false;
     public:
         Subscription() : unsubscribed(true) {
             __android_log_print(ANDROID_LOG_INFO, TAG2, "===(+) Subscription %0x", this);
         }
 
-        Subscription(BehaviorSubject<T>* owner, std::shared_ptr<FuncPt> observer) : owner(owner), observer(observer){
+        Subscription(BehaviorSubject<T>* owner, std::shared_ptr<FuncPt<T>> observer) : owner(owner), observer(observer){
             __android_log_print(ANDROID_LOG_INFO, TAG2, "===(+) Subscription2 %0x", this);
         }
         ~Subscription() {
@@ -49,12 +49,13 @@ namespace HandyRx {
 
     template <class T>
     class BehaviorSubject {
-    private:
+    protected:
         //-- https://stackoverflow.com/questions/4584685/vector-of-stdfunction
         //-- std::function이 operator==가 제대로 안됨, 그래서 어쩔수 없이 shared_ptr 사용한다. 허허허..
-        std::vector<std::shared_ptr<FuncPt>> observers;
+        std::vector<std::shared_ptr<FuncPt<T>>> observers;
         T value;
         bool distinct = false;
+        int _skipFirst = false;
         void notifyChanged() {
             for (auto& f : observers) {
                 (*f.get())(value);
@@ -64,7 +65,7 @@ namespace HandyRx {
         BehaviorSubject(T t) : value(t) {
         };
 
-        T& getValue() {
+        virtual T& getValue() {
             return value;
         }
 
@@ -73,17 +74,24 @@ namespace HandyRx {
             return *this;
         }
 
-        Subscription<T> subscribe(FuncPt observer) {
-            std::shared_ptr<FuncPt> o = std::shared_ptr<FuncPt>(new std::function<void(T&)>(observer));
+        BehaviorSubject& skipFirst() {
+            _skipFirst = true;
+            return *this;
+        }
+        Subscription<T> subscribe(FuncPt<T> observer) {
+            std::shared_ptr<FuncPt<T>> o = std::shared_ptr<FuncPt<T>>(new FuncPt<T>(observer));
             observers.push_back(o);
+            if (!_skipFirst) {
+                notifyChanged();
+            }
             return Subscription<T>(this, o);
         }
 
-        std::shared_ptr<Subscription<T>> subscribeShared(FuncPt observer) {
+        std::shared_ptr<Subscription<T>> subscribeShared(FuncPt<T> observer) {
             return std::shared_ptr<Subscription<T>>(new Subscription<T>(subscribe(observer)));
         }
 
-        void unsubscribe(std::shared_ptr<FuncPt> observer) {
+        void unsubscribe(std::shared_ptr<FuncPt<T>> observer) {
             observers.erase(std::remove(observers.begin(), observers.end(), observer), observers.end());
         }
 
@@ -96,6 +104,14 @@ namespace HandyRx {
             notifyChanged();
         }
     };
+
+//    template <class T>
+//    class PublishSubject : public BehaviorSubject<T> {
+//    public :
+//        PublishSubject() : BehaviorSubject<T>(nullptr) {
+//            this->skipFirst();
+//        }
+//    };
 
 };
 
