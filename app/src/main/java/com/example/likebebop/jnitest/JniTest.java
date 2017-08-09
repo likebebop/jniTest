@@ -1,5 +1,9 @@
 package com.example.likebebop.jnitest;
 
+import android.util.Log;
+
+import java.util.Arrays;
+
 /**
  * Created by likebebop on 2017. 5. 28..
  */
@@ -12,6 +16,10 @@ public class JniTest {
 
     public String getStringFromJava(int id) {
         return "hello java " + id;
+    }
+
+    public void callVoid() {
+        Log.d("likebebop" , "=== callVoid ");
     }
 
     public native void testAll();

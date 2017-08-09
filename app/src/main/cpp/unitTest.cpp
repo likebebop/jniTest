@@ -220,7 +220,7 @@ namespace Test {
         std::shared_ptr<std::function<void(int&)>> f2 = std::shared_ptr<std::function<void(int&)>>(new std::function<void(int&)>(onValue));
         s.onNext(1);
         Subscription<int> sub1 = s.subscribe(onValue);
-        Subscription<int> sub2 = s.subscribe(onValue);
+        std::shared_ptr<Subscription<int>> sub2 = s.subscribeShared(onValue);
         s.onNext(3);
         s.onNext(3);
         s.onNext(5);
