@@ -5,8 +5,9 @@
 #include <map>
 #include "HandyRx.hpp"
 
-
 using namespace std;
+
+
 
 
 using namespace HandyRx;
@@ -316,7 +317,16 @@ namespace Test {
 
     void testStruct() {
         Student s;
+        s.name = "test";
         s.debug();
+
+        Student s2;
+        __android_log_print(ANDROID_LOG_INFO, TAG, "s %.2x, s2 %.2x", &s, &s2);
+        __android_log_print(ANDROID_LOG_INFO, TAG, "after copy, s %.2x, s2 %.2x, %s", &s, &s2, s2.name.c_str());
+
+        s2 = s;
+        __android_log_print(ANDROID_LOG_INFO, TAG, "after copy, s %.2x, s2 %.2x, %s", &s, &s2, s2.name.c_str());
+
         char buf[1024];
         sprintf(buf, "* id : %d, name : %s, p : %.2f, addr of getName : %0x, addr of getNameByInline : %0x", s.id, s.name.c_str(), s.percentage, &(s.getName()), &(s.getNameByInline()));
         My::debug(buf);
@@ -543,6 +553,20 @@ namespace Test {
         __android_log_print(ANDROID_LOG_INFO, TAG, "testBinaryText 1 => %s", &(resourceMap[TEST_KEY].compressed)[0]);
     }
 
+    void buildPtr(int **pInt) {
+        if (*pInt == nullptr) {
+            *pInt = new int(5);
+        }
+    }
+
+    void testPointer() {
+        int* pInt = nullptr;
+        //__android_log_print(ANDROID_LOG_INFO, TAG, "pInt => %d", *pInt);
+        buildPtr(&pInt);
+        __android_log_print(ANDROID_LOG_INFO, TAG, "pInt => %d", *pInt);
+        delete pInt;
+    }
+
 }
 
 
@@ -556,7 +580,8 @@ Java_com_example_likebebop_jnitest_JniTest_testAll(JNIEnv *env, jobject instance
 
 
     testPublishSubject();
-    //testStruct();
+    testStruct();
+    testPointer();
     //testVector();
 //
 //    testSharedPtr();
