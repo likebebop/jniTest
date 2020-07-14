@@ -33,4 +33,6 @@ proguard/
 captures/
 
 
-
+*/.cxx/*
+.idea/*
+.idea/

@@ -173,7 +173,7 @@ namespace Test {
     using namespace My;
 
     void onValue(int& v) {
-        __android_log_print(ANDROID_LOG_INFO, TAG, "=== onValue %d", v);
+        __android_log_print(ANDROID_LOG_INFO, My::TAG, "=== onValue %d", v);
     }
 
     //template <class T>
@@ -216,17 +216,23 @@ namespace Test {
     void testPublishSubject() {
         PublishSubject<int> s = PublishSubject<int>();
 
-        std::shared_ptr<std::function<void(int&)>> f = std::shared_ptr<std::function<void(int&)>>(new std::function<void(int&)>(onValue));
+//        std::shared_ptr<std::function<void(int&)>> f = std::shared_ptr<std::function<void(int&)>>(new std::function<void(int&)>(onValue));
 
-        std::shared_ptr<std::function<void(int&)>> f2 = std::shared_ptr<std::function<void(int&)>>(new std::function<void(int&)>(onValue));
+//        std::shared_ptr<std::function<void(int&)>> f2 = std::shared_ptr<std::function<void(int&)>>(new std::function<void(int&)>(onValue));
+
         s.onNext(1);
-        Subscription<int> sub1 = s.subscribe(onValue);
+//        FuncPt<int> ptr = [&](int& a) {
+//
+//        });
+        FuncPt<int> ptr = [&](int& a) {
+            __android_log_print(ANDROID_LOG_INFO, My::TAG, "=== my inline function %d", a);
+        };
+        Subscription<int> sub1 = s.subscribe(ptr);
         std::shared_ptr<Subscription<int>> sub2 = s.subscribeShared(onValue);
         s.onNext(3);
         s.onNext(3);
         s.onNext(5);
         s.onNext(3);
-
         sub1.unsubscribe();
         s.onNext(5);
     }
@@ -257,14 +263,14 @@ namespace Test {
 
     extern unsigned char passthrough_frag[];
     void testString() {
-        debug("==== 웁스 =====");
+        My::debug("==== 웁스 =====");
         string s = "aa";
         debug(s.append(" bb"));
 
 
         string a = cstrToString(NULL);
-        debug(a);
-        debug("");
+        My::debug(a);
+        My::debug("");
 
         a = cstrToString("ha");
         debug(a);
@@ -295,10 +301,10 @@ namespace Test {
         LuaCallback(const char* name) : name(name) {
         }
         ~LuaCallback() {
-            __android_log_print(ANDROID_LOG_INFO, TAG, "~LuaCallback  (%s)", name);
+            __android_log_print(ANDROID_LOG_INFO, My::TAG, "~LuaCallback  (%s)", name);
         }
         void debug() {
-            __android_log_print(ANDROID_LOG_INFO, TAG, "=== LuaCallback  (%s)", name);
+            __android_log_print(ANDROID_LOG_INFO, My::TAG, "=== LuaCallback  (%s)", name);
         }
     };
 
@@ -580,8 +586,8 @@ Java_com_example_likebebop_jnitest_JniTest_testAll(JNIEnv *env, jobject instance
 
 
     testPublishSubject();
-    testStruct();
-    testPointer();
+//    testStruct();
+//    testPointer();
     //testVector();
 //
 //    testSharedPtr();

@@ -8,8 +8,11 @@
 
 #include <vector>
 #include <functional>
+#include <android/log.h>
 
 namespace HandyRx {
+    static const char* TAG2 = "likebebop";
+
 
     template <class T>
     using FuncPt = std::function<void(T&)>;
@@ -31,9 +34,11 @@ namespace HandyRx {
         }
 
         Subscription(Unsubscribable<T>* owner, std::shared_ptr<FuncPt<T>> observer) : owner(owner), observer(observer){
+            __android_log_print(ANDROID_LOG_INFO, TAG2, "Subscription() %p", this);
         }
         ~Subscription() {
             unsubscribe();
+            __android_log_print(ANDROID_LOG_INFO, TAG2, "~Subscription() %p", this);
         }
 
         void unsubscribe() {
