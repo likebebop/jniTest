@@ -247,13 +247,13 @@ namespace Test {
         FuncPt<int> ptr = [&](int& a) {
             __android_log_print(ANDROID_LOG_INFO, My::TAG, "=== my inline function %d", a);
         };
-        Subscription<int> sub1 = s.subscribe(ptr);
+        //Subscription<int> sub1 = s.subscribe(ptr);
         std::shared_ptr<Subscription<int>> sub2 = s.subscribeShared(onValue);
         s.onNext(3);
         s.onNext(3);
         s.onNext(5);
         s.onNext(3);
-        sub1.unsubscribe();
+       // sub1.unsubscribe();
         s.onNext(5);
 
 
