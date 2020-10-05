@@ -213,6 +213,26 @@ namespace Test {
         s.onNext(5);
     }
 
+    class TestClass {
+    public:
+        std::shared_ptr<Subscription<int>> intSub = nullptr;
+
+        PublishSubject<int> s;
+        void init() {
+            intSub = s.subscribeShared([&](int& a) {
+                __android_log_print(ANDROID_LOG_INFO, My::TAG, "=== TestClass s %d", a);
+            });
+        }
+    };
+
+    void testPublishSubject2() {
+        __android_log_print(ANDROID_LOG_INFO, My::TAG, "=== begin of test");
+        TestClass* t= new TestClass();
+        t->init();
+        delete t;
+        __android_log_print(ANDROID_LOG_INFO, My::TAG, "=== end of test");
+    }
+
     void testPublishSubject() {
         PublishSubject<int> s = PublishSubject<int>();
 
@@ -236,7 +256,7 @@ namespace Test {
         sub1.unsubscribe();
         s.onNext(5);
 
-        
+
     }
 
 
@@ -586,8 +606,8 @@ using namespace Test;
 JNIEXPORT void JNICALL
 Java_com_example_likebebop_jnitest_JniTest_testAll(JNIEnv *env, jobject instance) {
 
-
-    testPublishSubject();
+    testPublishSubject2();
+//    testPublishSubject();
 //    testStruct();
 //    testPointer();
     //testVector();
