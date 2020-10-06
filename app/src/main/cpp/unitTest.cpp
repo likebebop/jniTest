@@ -180,61 +180,75 @@ namespace Test {
     //typedef std::shared_ptr<std::function<void(T&)>> functionPointer;
 
     void testHandyRx() {
-        BehaviorSubject<int> s = BehaviorSubject<int>(1).distinctUntilChanged();
-        //BehaviorSubject<int> s = BehaviorSubject<int>(1);
-        //onValue;
 
-        std::shared_ptr<std::function<void(int&)>> f = std::shared_ptr<std::function<void(int&)>>(new std::function<void(int&)>(onValue));
+         __android_log_print(ANDROID_LOG_INFO, TAG, "=== pointer equals ===");
+        {
+            BehaviorSubject<int> s = BehaviorSubject<int>(1).distinctUntilChanged();
+            //BehaviorSubject<int> s = BehaviorSubject<int>(1);
+            //onValue;
 
-        std::shared_ptr<std::function<void(int&)>> f2 = std::shared_ptr<std::function<void(int&)>>(new std::function<void(int&)>(onValue));
+            std::shared_ptr<std::function<void(int&)>> f = std::shared_ptr<std::function<void(int&)>>(new std::function<void(int&)>(onValue));
 
-//        if (f == f2) {
-//            __android_log_print(ANDROID_LOG_INFO, TAG, "=== pointer equals ===");
-//            return;
-//        }
+            std::shared_ptr<std::function<void(int&)>> f2 = std::shared_ptr<std::function<void(int&)>>(new std::function<void(int&)>(onValue));
 
-//        std::function<void(int&)> f3 = onValue;
-//        std::function<void(int&)>& f4 = f3;
-//
-//        //std::shared_ptr<std::function<void(int&)>> f2 = new std::function<void(int&)>(onValue);
-//
-//        if (f4 == f4) {
-//            __android_log_print(ANDROID_LOG_INFO, TAG, "=== pointer equals ===");
-//        }
+        //        if (f == f2) {
+        //            __android_log_print(ANDROID_LOG_INFO, TAG, "=== pointer equals ===");
+        //            return;
+        //        }
 
-        Subscription<int> sub1 = s.subscribe(onValue);
-        Subscription<int> sub2 = s.subscribe(onValue);
-        s.onNext(3);
-        s.onNext(3);
-        s.onNext(5);
-        s.onNext(3);
+        //        std::function<void(int&)> f3 = onValue;
+        //        std::function<void(int&)>& f4 = f3;
+        //
+        //        //std::shared_ptr<std::function<void(int&)>> f2 = new std::function<void(int&)>(onValue);
+        //
+        //        if (f4 == f4) {
+        //            __android_log_print(ANDROID_LOG_INFO, TAG, "=== pointer equals ===");
+        //        }
 
-        sub1.unsubscribe();
-        s.onNext(5);
+            Subscription<int> sub1 = s.subscribe(onValue);
+            Subscription<int> sub2 = s.subscribe(onValue);
+            s.onNext(3);
+            s.onNext(3);
+            s.onNext(5);
+            s.onNext(3);
+
+            sub1.unsubscribe();
+            s.onNext(5);
+        }
     }
 
     void testPublishSubject() {
-        PublishSubject<int> s = PublishSubject<int>();
 
-//        std::shared_ptr<std::function<void(int&)>> f = std::shared_ptr<std::function<void(int&)>>(new std::function<void(int&)>(onValue));
+        __android_log_print(ANDROID_LOG_INFO, My::TAG, "=== testPublishSubject begin");
 
-//        std::shared_ptr<std::function<void(int&)>> f2 = std::shared_ptr<std::function<void(int&)>>(new std::function<void(int&)>(onValue));
+        {
+            PublishSubject<int> s = PublishSubject<int>();
 
-        s.onNext(1);
-//        FuncPt<int> ptr = [&](int& a) {
-//
-//        });
-        FuncPt<int> ptr = [&](int& a) {
-            __android_log_print(ANDROID_LOG_INFO, My::TAG, "=== my inline function %d", a);
-        };
-        Subscription<int> sub1 = s.subscribe(ptr);
-        std::shared_ptr<Subscription<int>> sub2 = s.subscribeShared(onValue);
-        s.onNext(3);
-        s.onNext(3);
-        s.onNext(5);
-        s.onNext(3);
-        sub1.unsubscribe();
-        s.onNext(5);
+    //        std::shared_ptr<std::function<void(int&)>> f = std::shared_ptr<std::function<void(int&)>>(new std::function<void(int&)>(onValue));
+
+    //        std::shared_ptr<std::function<void(int&)>> f2 = std::shared_ptr<std::function<void(int&)>>(new std::function<void(int&)>(onValue));
+
+            s.onNext(1);
+    //        FuncPt<int> ptr = [&](int& a) {
+    //
+    //        });
+            FuncPt<int> ptr = [&](int& a) {
+                __android_log_print(ANDROID_LOG_INFO, My::TAG, "=== my inline function %d", a);
+            };
+            Subscription<int> sub0 = s.subscribe(nullptr);
+            Subscription<int> sub1 = s.subscribe(ptr);
+            std::shared_ptr<Subscription<int>> sub2 = s.subscribeShared(onValue);
+            s.onNext(3);
+            sub0.unsubscribe();
+            s.onNext(3);
+            s.onNext(5);
+            s.onNext(3);
+            sub2 = nullptr;
+            __android_log_print(ANDROID_LOG_INFO, My::TAG, "=== sub2 null");
+            s.onNext(5);
+            sub1.unsubscribe();
+        }
+        __android_log_print(ANDROID_LOG_INFO, My::TAG, "=== testPublishSubject end");
     }
 
 
@@ -309,6 +323,18 @@ namespace Test {
     };
 
     void testVector() {
+        vector<int> v;
+        v.erase(std::remove(v.begin(), v.end(), 1), v.end());
+        for( int i = 0; i < 10; ++i ) {
+            v.push_back(i);
+        }
+        assert(v.size() == 10);
+        v.erase(std::remove(v.begin(), v.end(), 1), v.end());
+        assert(v.size() == 9);
+        assert(v.size() == 8);
+
+    }
+    void testVector2() {
         map<CallbackType, shared_ptr<LuaCallback>> callMap;
         int i = 0;
         for (auto& name : callbackNames) {
@@ -586,9 +612,10 @@ Java_com_example_likebebop_jnitest_JniTest_testAll(JNIEnv *env, jobject instance
 
 
     testPublishSubject();
+
 //    testStruct();
 //    testPointer();
-    //testVector();
+    testVector();
 //
 //    testSharedPtr();
 //    testLoop();

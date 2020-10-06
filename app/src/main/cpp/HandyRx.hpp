@@ -60,7 +60,10 @@ namespace HandyRx {
         bool distinct = false;
         int _skipFirst = false;
         void notifyChanged() {
-            for (auto& f : observers) {
+            for (auto f : observers) {
+                if (!(*f.get())) {
+                    continue;
+                }
                 (*f.get())(value);
             }
         }
@@ -116,7 +119,11 @@ namespace HandyRx {
         std::vector<std::shared_ptr<FuncPt<T>>> observers;
         T value;
         void notifyChanged() {
-            for (auto& f : observers) {
+            for (auto f : observers) {
+                if (!(*f.get())) {
+                    __android_log_print(ANDROID_LOG_INFO, TAG2, "error on notifyChanged at %p", &f);
+                    continue;
+                }
                 (*f.get())(value);
             }
         }
