@@ -176,20 +176,24 @@ namespace Test {
         __android_log_print(ANDROID_LOG_INFO, My::TAG, "=== onValue %d", v);
     }
 
+    void onValue2(int& v) {
+        __android_log_print(ANDROID_LOG_INFO, My::TAG, "=== onValue2 %d", v);
+    }
+
     //template <class T>
     //typedef std::shared_ptr<std::function<void(T&)>> functionPointer;
 
     void testHandyRx() {
 
          __android_log_print(ANDROID_LOG_INFO, TAG, "=== pointer equals ===");
-        {
+
             BehaviorSubject<int> s = BehaviorSubject<int>(1).distinctUntilChanged();
             //BehaviorSubject<int> s = BehaviorSubject<int>(1);
             //onValue;
 
-            std::shared_ptr<std::function<void(int&)>> f = std::shared_ptr<std::function<void(int&)>>(new std::function<void(int&)>(onValue));
+//            std::shared_ptr<std::function<void(int&)>> f = std::shared_ptr<std::function<void(int&)>>(new std::function<void(int&)>(onValue));
 
-            std::shared_ptr<std::function<void(int&)>> f2 = std::shared_ptr<std::function<void(int&)>>(new std::function<void(int&)>(onValue));
+//            std::shared_ptr<std::function<void(int&)>> f2 = std::shared_ptr<std::function<void(int&)>>(new std::function<void(int&)>(onValue));
 
         //        if (f == f2) {
         //            __android_log_print(ANDROID_LOG_INFO, TAG, "=== pointer equals ===");
@@ -205,16 +209,15 @@ namespace Test {
         //            __android_log_print(ANDROID_LOG_INFO, TAG, "=== pointer equals ===");
         //        }
 
-            Subscription<int> sub1 = s.subscribe(onValue);
-            Subscription<int> sub2 = s.subscribe(onValue);
+            auto sub1 = s.subscribeShared(onValue);
+            auto sub2 = s.subscribeShared(onValue2);
             s.onNext(3);
             s.onNext(3);
             s.onNext(5);
             s.onNext(3);
 
-            sub1.unsubscribe();
+            sub1->unsubscribe();
             s.onNext(5);
-        }
     }
 
     class TestClass {
@@ -647,7 +650,7 @@ using namespace Test;
 JNIEXPORT void JNICALL
 Java_com_example_likebebop_jnitest_JniTest_testAll(JNIEnv *env, jobject instance) {
 
-
+    testHandyRx();
 //    testPublishSubject();
 
     testPublishSubject2();

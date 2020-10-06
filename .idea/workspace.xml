@@ -30,11 +30,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c52535a-6ee9-4977-bc27-f1d7acd168ea" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_core_2_2_2_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_core_2_2_2_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_idling_resource_2_2_2_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_idling_resource_2_2_2_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_exposed_instrumentation_api_publish_0_5_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_exposed_instrumentation_api_publish_0_5_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_rules_0_5_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_rules_0_5_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_runner_0_5_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_runner_0_5_aar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/cpp/HandyRx.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/cpp/HandyRx.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/cpp/unitTest.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/cpp/unitTest.cpp" afterDir="false" />
@@ -74,12 +69,6 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
-  <component name="ProjectFrameBounds">
-    <option name="x" value="2573" />
-    <option name="y" value="78" />
-    <option name="width" value="1920" />
-    <option name="height" value="1177" />
-  </component>
   <component name="ProjectId" id="1efXslZ8g30zIQ3z2HWkGVJ1wqL" />
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -289,26 +278,50 @@
       <screen x="0" y="23" width="2560" height="1337" />
     </state>
     <state x="973" y="329" key="#app/2560.150.2560.1417/0.23.2560.1337@0.23.2560.1337" timestamp="1594714015260" />
-    <state width="2518" height="210" key="GridCell.Tab.0.bottom" timestamp="1601948472286">
+    <state x="3696" y="503" key="AndroidProcessChooserDialog" timestamp="1601949893536">
+      <screen x="2560" y="23" width="2560" height="1417" />
+    </state>
+    <state x="3696" y="503" key="AndroidProcessChooserDialog/2560.23.2560.1417/0.23.2560.1340@2560.23.2560.1417" timestamp="1601949893536" />
+    <state width="2518" height="592" key="GridCell.Tab.0.bottom" timestamp="1601950884829">
       <screen x="0" y="23" width="2560" height="1340" />
     </state>
     <state width="2518" height="384" key="GridCell.Tab.0.bottom/2560.150.2560.1417/0.23.2560.1337@0.23.2560.1337" timestamp="1594717874954" />
-    <state width="2518" height="210" key="GridCell.Tab.0.bottom/2560.23.2560.1417/0.23.2560.1340@0.23.2560.1340" timestamp="1601948472286" />
-    <state width="2518" height="210" key="GridCell.Tab.0.center" timestamp="1601948472286">
+    <state width="2518" height="592" key="GridCell.Tab.0.bottom/2560.23.2560.1417/0.23.2560.1340@0.23.2560.1340" timestamp="1601950884829" />
+    <state width="2518" height="390" key="GridCell.Tab.0.bottom/2560.23.2560.1417/0.23.2560.1340@2560.23.2560.1417" timestamp="1601950102393" />
+    <state width="2518" height="592" key="GridCell.Tab.0.center" timestamp="1601950884828">
       <screen x="0" y="23" width="2560" height="1340" />
     </state>
     <state width="2518" height="384" key="GridCell.Tab.0.center/2560.150.2560.1417/0.23.2560.1337@0.23.2560.1337" timestamp="1594717874954" />
-    <state width="2518" height="210" key="GridCell.Tab.0.center/2560.23.2560.1417/0.23.2560.1340@0.23.2560.1340" timestamp="1601948472286" />
-    <state width="2518" height="210" key="GridCell.Tab.0.left" timestamp="1601948472286">
+    <state width="2518" height="592" key="GridCell.Tab.0.center/2560.23.2560.1417/0.23.2560.1340@0.23.2560.1340" timestamp="1601950884828" />
+    <state width="2518" height="390" key="GridCell.Tab.0.center/2560.23.2560.1417/0.23.2560.1340@2560.23.2560.1417" timestamp="1601950102393" />
+    <state width="2518" height="592" key="GridCell.Tab.0.left" timestamp="1601950884828">
       <screen x="0" y="23" width="2560" height="1340" />
     </state>
     <state width="2518" height="384" key="GridCell.Tab.0.left/2560.150.2560.1417/0.23.2560.1337@0.23.2560.1337" timestamp="1594717874953" />
-    <state width="2518" height="210" key="GridCell.Tab.0.left/2560.23.2560.1417/0.23.2560.1340@0.23.2560.1340" timestamp="1601948472286" />
-    <state width="2518" height="210" key="GridCell.Tab.0.right" timestamp="1601948472286">
+    <state width="2518" height="592" key="GridCell.Tab.0.left/2560.23.2560.1417/0.23.2560.1340@0.23.2560.1340" timestamp="1601950884828" />
+    <state width="2518" height="390" key="GridCell.Tab.0.left/2560.23.2560.1417/0.23.2560.1340@2560.23.2560.1417" timestamp="1601950102393" />
+    <state width="2518" height="592" key="GridCell.Tab.0.right" timestamp="1601950884829">
       <screen x="0" y="23" width="2560" height="1340" />
     </state>
     <state width="2518" height="384" key="GridCell.Tab.0.right/2560.150.2560.1417/0.23.2560.1337@0.23.2560.1337" timestamp="1594717874954" />
-    <state width="2518" height="210" key="GridCell.Tab.0.right/2560.23.2560.1417/0.23.2560.1340@0.23.2560.1340" timestamp="1601948472286" />
+    <state width="2518" height="592" key="GridCell.Tab.0.right/2560.23.2560.1417/0.23.2560.1340@0.23.2560.1340" timestamp="1601950884829" />
+    <state width="2518" height="390" key="GridCell.Tab.0.right/2560.23.2560.1417/0.23.2560.1340@2560.23.2560.1417" timestamp="1601950102393" />
+    <state width="2518" height="501" key="GridCell.Tab.1.bottom" timestamp="1601949930663">
+      <screen x="2560" y="23" width="2560" height="1417" />
+    </state>
+    <state width="2518" height="501" key="GridCell.Tab.1.bottom/2560.23.2560.1417/0.23.2560.1340@2560.23.2560.1417" timestamp="1601949930663" />
+    <state width="2518" height="501" key="GridCell.Tab.1.center" timestamp="1601949930662">
+      <screen x="2560" y="23" width="2560" height="1417" />
+    </state>
+    <state width="2518" height="501" key="GridCell.Tab.1.center/2560.23.2560.1417/0.23.2560.1340@2560.23.2560.1417" timestamp="1601949930662" />
+    <state width="2518" height="501" key="GridCell.Tab.1.left" timestamp="1601949930662">
+      <screen x="2560" y="23" width="2560" height="1417" />
+    </state>
+    <state width="2518" height="501" key="GridCell.Tab.1.left/2560.23.2560.1417/0.23.2560.1340@2560.23.2560.1417" timestamp="1601949930662" />
+    <state width="2518" height="501" key="GridCell.Tab.1.right" timestamp="1601949930663">
+      <screen x="2560" y="23" width="2560" height="1417" />
+    </state>
+    <state width="2518" height="501" key="GridCell.Tab.1.right/2560.23.2560.1417/0.23.2560.1340@2560.23.2560.1417" timestamp="1601949930663" />
     <state x="1010" y="430" width="540" height="524" key="StructurePopup" timestamp="1594778895783">
       <screen x="0" y="23" width="2560" height="1337" />
     </state>
@@ -323,6 +336,50 @@
     <state x="945" y="342" width="670" height="676" key="search.everywhere.popup/2560.150.2560.1417/0.23.2560.1337@0.23.2560.1337" timestamp="1594790524083" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/app/src/main/cpp/unitTest.cpp</url>
+          <line>211</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/app/src/main/cpp/unitTest.cpp</url>
+          <line>212</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/app/src/main/cpp/unitTest.cpp</url>
+          <line>213</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/app/src/main/cpp/unitTest.cpp</url>
+          <line>215</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/app/src/main/cpp/unitTest.cpp</url>
+          <line>214</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/app/src/main/cpp/unitTest.cpp</url>
+          <line>218</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/app/src/main/cpp/unitTest.cpp</url>
+          <line>189</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/app/src/main/cpp/unitTest.cpp</url>
+          <line>187</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="AndroidRunConfigurationType">
         <watch expression="test[4]" language="ObjectiveC" />
