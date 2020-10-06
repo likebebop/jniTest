@@ -217,6 +217,26 @@ namespace Test {
         }
     }
 
+    class TestClass {
+    public:
+        std::shared_ptr<Subscription<int>> intSub = nullptr;
+
+        PublishSubject<int> s;
+        void init() {
+            intSub = s.subscribeShared([&](int& a) {
+                __android_log_print(ANDROID_LOG_INFO, My::TAG, "=== TestClass s %d", a);
+            });
+        }
+    };
+
+    void testPublishSubject2() {
+        __android_log_print(ANDROID_LOG_INFO, My::TAG, "=== begin of test");
+        TestClass* t= new TestClass();
+        t->init();
+        delete t;
+        __android_log_print(ANDROID_LOG_INFO, My::TAG, "=== end of test");
+    }
+
     void testPublishSubject() {
 
         __android_log_print(ANDROID_LOG_INFO, My::TAG, "=== testPublishSubject begin");
@@ -232,23 +252,40 @@ namespace Test {
     //        FuncPt<int> ptr = [&](int& a) {
     //
     //        });
-            FuncPt<int> ptr = [&](int& a) {
-                __android_log_print(ANDROID_LOG_INFO, My::TAG, "=== my inline function %d", a);
-            };
-            Subscription<int> sub0 = s.subscribe(nullptr);
-            Subscription<int> sub1 = s.subscribe(ptr);
-            std::shared_ptr<Subscription<int>> sub2 = s.subscribeShared(onValue);
-            s.onNext(3);
-            sub0.unsubscribe();
-            s.onNext(3);
-            s.onNext(5);
-            s.onNext(3);
-            sub2 = nullptr;
-            __android_log_print(ANDROID_LOG_INFO, My::TAG, "=== sub2 null");
-            s.onNext(5);
-            sub1.unsubscribe();
+//            FuncPt<int> ptr = [&](int& a) {
+//                __android_log_print(ANDROID_LOG_INFO, My::TAG, "=== my inline function %d", a);
+//            };
+//            Subscription<int> sub0 = s.subscribe(nullptr);
+//            Subscription<int> sub1 = s.subscribe(ptr);
+//            std::shared_ptr<Subscription<int>> sub2 = s.subscribeShared(onValue);
+//            s.onNext(3);
+//            sub0.unsubscribe();
+//            s.onNext(3);
+//            s.onNext(5);
+//            s.onNext(3);
+//            sub2 = nullptr;
+//            __android_log_print(ANDROID_LOG_INFO, My::TAG, "=== sub2 null");
+//            s.onNext(5);
+//            sub1.unsubscribe();
         }
+        PublishSubject<int> s = PublishSubject<int>();
         __android_log_print(ANDROID_LOG_INFO, My::TAG, "=== testPublishSubject end");
+        s.onNext(1);
+//        FuncPt<int> ptr = [&](int& a) {
+//
+//        });
+        FuncPt<int> ptr = [&](int& a) {
+            __android_log_print(ANDROID_LOG_INFO, My::TAG, "=== my inline function %d", a);
+        };
+        //Subscription<int> sub1 = s.subscribe(ptr);
+        std::shared_ptr<Subscription<int>> sub2 = s.subscribeShared(onValue);
+        s.onNext(3);
+        s.onNext(3);
+        s.onNext(5);
+        s.onNext(3);
+       // sub1.unsubscribe();
+        s.onNext(5);
+
     }
 
 
@@ -611,11 +648,12 @@ JNIEXPORT void JNICALL
 Java_com_example_likebebop_jnitest_JniTest_testAll(JNIEnv *env, jobject instance) {
 
 
-    testPublishSubject();
+//    testPublishSubject();
 
+    testPublishSubject2();
 //    testStruct();
 //    testPointer();
-    testVector();
+//    testVector();
 //
 //    testSharedPtr();
 //    testLoop();

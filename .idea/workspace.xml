@@ -30,33 +30,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c52535a-6ee9-4977-bc27-f1d7acd168ea" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_core_2_2_2_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_idling_resource_2_2_2_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_exposed_instrumentation_api_publish_0_5_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_rules_0_5_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_runner_0_5_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_code_findbugs_jsr305_2_0_1_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_javawriter_2_1_1_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__javax_annotation_javax_annotation_api_1_2_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__javax_inject_javax_inject_1_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__junit_junit_4_12_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_hamcrest_hamcrest_core_1_3_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_hamcrest_hamcrest_integration_1_3_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_hamcrest_hamcrest_library_1_3_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_core_2_2_2_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_core_2_2_2_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_idling_resource_2_2_2_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_idling_resource_2_2_2_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_exposed_instrumentation_api_publish_0_5_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_exposed_instrumentation_api_publish_0_5_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_rules_0_5_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_rules_0_5_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_runner_0_5_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_runner_0_5_aar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/cpp/HandyRx.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/cpp/HandyRx.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/cpp/unitTest.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/cpp/unitTest.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jniTest.iml" beforeDir="false" afterPath="$PROJECT_DIR$/jniTest.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +47,7 @@
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="ce071717ba45b42f057e" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="R3CN20EZEXV" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -308,30 +289,38 @@
       <screen x="0" y="23" width="2560" height="1337" />
     </state>
     <state x="973" y="329" key="#app/2560.150.2560.1417/0.23.2560.1337@0.23.2560.1337" timestamp="1594714015260" />
-    <state width="2518" height="273" key="GridCell.Tab.0.bottom" timestamp="1594714860116">
+    <state width="2518" height="210" key="GridCell.Tab.0.bottom" timestamp="1601948472286">
+      <screen x="0" y="23" width="2560" height="1340" />
+    </state>
+    <state width="2518" height="384" key="GridCell.Tab.0.bottom/2560.150.2560.1417/0.23.2560.1337@0.23.2560.1337" timestamp="1594717874954" />
+    <state width="2518" height="210" key="GridCell.Tab.0.bottom/2560.23.2560.1417/0.23.2560.1340@0.23.2560.1340" timestamp="1601948472286" />
+    <state width="2518" height="210" key="GridCell.Tab.0.center" timestamp="1601948472286">
+      <screen x="0" y="23" width="2560" height="1340" />
+    </state>
+    <state width="2518" height="384" key="GridCell.Tab.0.center/2560.150.2560.1417/0.23.2560.1337@0.23.2560.1337" timestamp="1594717874954" />
+    <state width="2518" height="210" key="GridCell.Tab.0.center/2560.23.2560.1417/0.23.2560.1340@0.23.2560.1340" timestamp="1601948472286" />
+    <state width="2518" height="210" key="GridCell.Tab.0.left" timestamp="1601948472286">
+      <screen x="0" y="23" width="2560" height="1340" />
+    </state>
+    <state width="2518" height="384" key="GridCell.Tab.0.left/2560.150.2560.1417/0.23.2560.1337@0.23.2560.1337" timestamp="1594717874953" />
+    <state width="2518" height="210" key="GridCell.Tab.0.left/2560.23.2560.1417/0.23.2560.1340@0.23.2560.1340" timestamp="1601948472286" />
+    <state width="2518" height="210" key="GridCell.Tab.0.right" timestamp="1601948472286">
+      <screen x="0" y="23" width="2560" height="1340" />
+    </state>
+    <state width="2518" height="384" key="GridCell.Tab.0.right/2560.150.2560.1417/0.23.2560.1337@0.23.2560.1337" timestamp="1594717874954" />
+    <state width="2518" height="210" key="GridCell.Tab.0.right/2560.23.2560.1417/0.23.2560.1340@0.23.2560.1340" timestamp="1601948472286" />
+    <state x="1010" y="430" width="540" height="524" key="StructurePopup" timestamp="1594778895783">
       <screen x="0" y="23" width="2560" height="1337" />
     </state>
-    <state width="2518" height="273" key="GridCell.Tab.0.bottom/2560.150.2560.1417/0.23.2560.1337@0.23.2560.1337" timestamp="1594714860116" />
-    <state width="2518" height="273" key="GridCell.Tab.0.center" timestamp="1594714860115">
-      <screen x="0" y="23" width="2560" height="1337" />
-    </state>
-    <state width="2518" height="273" key="GridCell.Tab.0.center/2560.150.2560.1417/0.23.2560.1337@0.23.2560.1337" timestamp="1594714860115" />
-    <state width="2518" height="273" key="GridCell.Tab.0.left" timestamp="1594714860115">
-      <screen x="0" y="23" width="2560" height="1337" />
-    </state>
-    <state width="2518" height="273" key="GridCell.Tab.0.left/2560.150.2560.1417/0.23.2560.1337@0.23.2560.1337" timestamp="1594714860115" />
-    <state width="2518" height="273" key="GridCell.Tab.0.right" timestamp="1594714860116">
-      <screen x="0" y="23" width="2560" height="1337" />
-    </state>
-    <state width="2518" height="273" key="GridCell.Tab.0.right/2560.150.2560.1417/0.23.2560.1337@0.23.2560.1337" timestamp="1594714860116" />
+    <state x="1010" y="430" width="540" height="524" key="StructurePopup/2560.150.2560.1417/0.23.2560.1337@0.23.2560.1337" timestamp="1594778895783" />
     <state x="933" y="447" width="693" height="488" key="find.popup" timestamp="1594714393957">
       <screen x="0" y="23" width="2560" height="1337" />
     </state>
     <state x="933" y="447" width="693" height="488" key="find.popup/2560.150.2560.1417/0.23.2560.1337@0.23.2560.1337" timestamp="1594714393957" />
-    <state x="945" y="342" width="670" height="676" key="search.everywhere.popup" timestamp="1594714241541">
+    <state x="945" y="342" width="670" height="676" key="search.everywhere.popup" timestamp="1594790524083">
       <screen x="0" y="23" width="2560" height="1337" />
     </state>
-    <state x="945" y="342" width="670" height="676" key="search.everywhere.popup/2560.150.2560.1417/0.23.2560.1337@0.23.2560.1337" timestamp="1594714241541" />
+    <state x="945" y="342" width="670" height="676" key="search.everywhere.popup/2560.150.2560.1417/0.23.2560.1337@0.23.2560.1337" timestamp="1594790524083" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
